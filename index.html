@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SOB Slider Builder</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 500px;
+      margin: auto;
+    }
+    h2 {
+      text-align: center;
+    }
+    select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 16px;
+    }
+    #total-weight {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Build Your Fidget Slider</h2>
+
+  <label>Body:
+    <select class="weight-option">
+      <option value="" data-weight="0">-- Select Body --</option>
+      <option data-weight="0.9">Aluminum Body (0.9g)</option>
+      <option data-weight="1.3">Titanium Body (1.3g)</option>
+      <option data-weight="0.5">PEEK Body (0.5g)</option>
+    </select>
+  </label>
+
+  <label>Cage:
+    <select class="weight-option">
+      <option value="" data-weight="0">-- Select Cage --</option>
+      <option data-weight="0.2">TPU Cage (0.2g)</option>
+      <option data-weight="0.7">Aluminum Cage (0.7g)</option>
+    </select>
+  </label>
+
+  <label>Plates:
+    <select class="weight-option">
+      <option value="" data-weight="0">-- Select Plates --</option>
+      <option data-weight="1.0">Stainless Steel Plates (1.0g)</option>
+      <option data-weight="1.4">Copper Plates (1.4g)</option>
+      <option data-weight="1.1">Brass Plates (1.1g)</option>
+    </select>
+  </label>
+
+  <label>Inlay:
+    <select class="weight-option">
+      <option value="" data-weight="0">-- Select Inlay --</option>
+      <option data-weight="0.3">Resin Inlay (0.3g)</option>
+      <option data-weight="0.4">Glow Inlay (0.4g)</option>
+      <option data-weight="0.5">Brass Inlay (0.5g)</option>
+    </select>
+  </label>
+
+  <h3>Total Weight: <span id="total-weight">0.00</span>g</h3>
+
+  <script>
+    const weightInputs = document.querySelectorAll('.weight-option');
+    const weightDisplay = document.getElementById('total-weight');
+
+    weightInputs.forEach(input => {
+      input.addEventListener('change', updateWeight);
+    });
+
+    function updateWeight() {
+      let total = 0;
+      weightInputs.forEach(select => {
+        const selected = select.options[select.selectedIndex];
+        const weight = parseFloat(selected.dataset.weight);
+        if (!isNaN(weight)) {
+          total += weight;
+        }
+      });
+      weightDisplay.textContent = total.toFixed(2);
+    }
+  </script>
+
+</body>
+</html>
