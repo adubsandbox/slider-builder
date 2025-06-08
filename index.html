@@ -9,44 +9,137 @@
       padding: 20px;
       max-width: 600px;
       margin: auto;
-      background-color: #f8f8f8;
+      background-color: #121212;
+      color: #f0f0f0;
     }
+
     h2 {
       text-align: center;
+      color: #00ccff;
     }
+
     a {
       text-decoration: none;
-      color: #0066cc;
+      color: #66ccff;
       font-weight: bold;
     }
+
     a:hover {
       text-decoration: underline;
     }
+
     label {
       display: block;
       margin-bottom: 15px;
     }
+
     select {
       width: 100%;
       padding: 8px;
       font-size: 1em;
       margin-top: 5px;
+      background-color: #1f1f1f;
+      color: #f0f0f0;
+      border: 1px solid #444;
     }
+
     #total-weight {
       font-size: 1.8em;
       font-weight: bold;
       text-align: center;
       margin-top: 20px;
-      color: #2b2b2b;
+      color: #00ff99;
     }
+
     .note {
       font-size: 0.9em;
       text-align: center;
-      color: gray;
+      color: #888;
       margin-top: 5px;
     }
   </style>
 </head>
 <body>
 
-  <h2>Build Your Fidget Sl
+  <h2>Build Your Fidget Slider</h2>
+
+  <p style="text-align:center; margin-bottom: 20px;">
+    <a href="https://www.fidgetthings.com/products/s-o-b-builder" target="_blank">
+      🧩 Open the Official S.O.B. Builder
+    </a>
+  </p>
+
+  <label>Bodies:
+    <select class="weight-option">
+      <option value="" data-weight="0">-- Select Body --</option>
+      <option data-weight="11">3D Print (11g)</option>
+      <option data-weight="12">3D Print Divot (12g)</option>
+      <option data-weight="8">3D Print Slim (8g)</option>
+      <option data-weight="56">SS (56g)</option>
+      <option data-weight="48">SS Slim (48g)</option>
+    </select>
+  </label>
+
+  <label>Cages:
+    <select class="weight-option">
+      <option value="" data-weight="0">-- Select Cage --</option>
+      <option data-weight="6">Al (6g)</option>
+      <option data-weight="7">AlBeta (7g)</option>
+      <option data-weight="20">Brass (20g)</option>
+      <option data-weight="24">BrassBeta (24g)</option>
+      <option data-weight="2">Acrylic (2g)</option>
+    </select>
+  </label>
+
+  <label>Plates:
+    <select class="weight-option">
+      <option value="" data-weight="0">-- Select Plates --</option>
+      <option data-weight="11">SS (11g)</option>
+      <option data-weight="16">SS Pro (16g)</option>
+      <option data-weight="15">DC SS Pro (15g)</option>
+      <option data-weight="12">Zirc Pro (12g)</option>
+      <option data-weight="14">SS (14g)</option>
+      <option data-weight="17">SSBeta (17g)</option>
+      <option data-weight="2">Acrylic (2g)</option>
+    </select>
+  </label>
+
+  <label>Inlay:
+    <select class="weight-option">
+      <option value="" data-weight="0">-- Select Inlay --</option>
+      <option data-weight="1">CarbonFiber (1g)</option>
+      <option data-weight="4">Brass (4g)</option>
+      <option data-weight="4">Copper (4g)</option>
+      <option data-weight="2">Ti (2g)</option>
+      <option data-weight="2">Zirc (2g)</option>
+      <option data-weight="1">Al (1g)</option>
+      <option data-weight="4">Cu (4g)</option>
+    </select>
+  </label>
+
+  <div id="total-weight">8.00g</div>
+  <div class="note">* Includes 8g for o-rings and magnets</div>
+
+  <script>
+    const weightInputs = document.querySelectorAll('.weight-option');
+    const weightDisplay = document.getElementById('total-weight');
+
+    weightInputs.forEach(input => {
+      input.addEventListener('change', updateWeight);
+    });
+
+    function updateWeight() {
+      let total = 8; // Base weight for o-rings and magnets
+      weightInputs.forEach(select => {
+        const selected = select.options[select.selectedIndex];
+        const weight = parseFloat(selected.dataset.weight);
+        if (!isNaN(weight)) {
+          total += weight;
+        }
+      });
+      weightDisplay.textContent = total.toFixed(2) + 'g';
+    }
+  </script>
+
+</body>
+</html>
