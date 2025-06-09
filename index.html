@@ -59,7 +59,8 @@
   </style>
 </head>
 <body>
-  <div class="container">
+  $1
+    <p style="font-size: 0.85em; color: #ff4c4c; margin-bottom: 10px;">* Red options indicate weight is TBD (0g placeholder)</p>
     <h2>S.O.B. Weight Calculator</h2>
     <p style="font-size: 0.95em;"><strong>Slider Sizes</strong><br>Regular: 30mm × 46mm × 18mm<br>Slim: 30mm × 46mm × 14mm</p>
     <label>Body Budget:
@@ -102,6 +103,13 @@
 
   <script>
     const weightMap = {
+      'Aluminum': 0,
+      'Copper': 0,
+      'Ultem': 0,
+      'Crystal Titanium': 0,
+      'Stainless Steel': 0,
+      'Zirconium': 0,
+      'Brass (Premium)': 60,
       '3D Print': 11,
       '3D Print Divot': 12,
       '3D Print Slim': 8,
@@ -155,21 +163,18 @@
 
     function handleBudgetBodyStyle() {
       const style = document.getElementById('budgetBodyStyle').value;
-      if (weightMap[style]) {
-        styleWeight = weightMap[style];
-      }
       clearStyleOptions();
       let html = '';
-      if (style === 'standard') {
+      if (style === '3D Print') {
         html += buildColorSelect('Body Color', ['black', 'blue', 'green', 'red', 'white', 'yellow', 'pink']);
         html += buildCageSelect();
         html += buildPlateSelect();
-      } else if (style === 'divot') {
+      } else if (style === '3D Print Divot') {
         html += buildColorSelect('Divot Color', ['black', 'white', 'green']);
         html += buildInlaySelect();
         html += buildCageSelect();
         html += buildPlateSelect();
-      } else if (style === 'slim') {
+      } else if (style === '3D Print Slim') {
         html += buildColorSelect('Slim Color', ['black', 'white', 'green silver', 'red', 'yellow', 'light blue', 'shifting green', 'shifting red', 'green glow', 'blue glow']);
         html += buildDidgetSelect();
         html += buildCageSelect();
@@ -191,9 +196,22 @@
       const style = document.getElementById('premiumBodyStyle').value;
       clearStyleOptions();
       let html = '';
-      if (style === 'standard') {
-        const bodyMaterials = ['Aluminum', 'Brass', 'Copper', 'Ultem', 'Crystal Titanium', 'Stainless Steel', 'Zirconium'];
-        html += buildMaterialSelect('Premium Body Material', bodyMaterials);
+      if (style === 'standard') // Premium Standard logic {
+        const bodyMaterials = [
+  { value: 'Brass (Premium)', label: 'Brass (Premium)', weight: 60 },
+  { value: 'Aluminum', label: 'Aluminum (TBD)', weight: null },
+  { value: 'Copper', label: 'Copper (TBD)', weight: null },
+  { value: 'Ultem', label: 'Ultem (TBD)', weight: null },
+  { value: 'Crystal Titanium', label: 'Crystal Titanium (TBD)', weight: null },
+  { value: 'Stainless Steel', label: 'Stainless Steel (TBD)', weight: null },
+  { value: 'Zirconium', label: 'Zirconium (TBD)', weight: null }
+];
+        html += `<label>Premium Body Material:
+  <select onchange="updateWeight()">
+    <option value="">Select...</option>
+    ${bodyMaterials.map(mat => `<option value="${mat.value}" ${mat.weight === null ? 'disabled' : ''}>${mat.label}${mat.weight ? ` (${mat.weight}g)` : ''}</option>`).join('')}
+  </select>
+</label>`;
         html += `<div id="crystalTitaniumColorContainer" class="hidden">${buildColorSelect('Crystal Titanium Color', ['RAW', 'Purple', 'Blue', 'Green'])}</div>`;
         html += buildInlaySelect();
         html += buildCageSelect();
@@ -213,7 +231,7 @@
             });
           });
         }, 0);
-      } else if (style === 'slim') {
+      } else if (style === 'slim') // Premium Slim logic {
         html += buildDidgetSelect();
         html += buildCageSelect();
         html += buildPlateSelect();
@@ -233,7 +251,7 @@
         <label>${label}:
           <select onchange="updateWeight()">
             <option value="">Select...</option>
-            ${capitalizedOptions.map(o => `<option value="${o.value}">${o.label}</option>`).join('')}
+            ${capitalizedOptions.map(o => `<option value="${o.value}" style="${o.rawWeight === 0 ? 'color: #ff4c4c;' : ''}">${o.label}</option>`).join('')}
           </select>
         </label>
       `;
