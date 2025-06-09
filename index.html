@@ -327,9 +327,7 @@
         total += weightMap[budgetStyleEl.value];
       }
 
-      if (premiumStyleEl && !premiumStyleEl.closest('.hidden') && weightMap[premiumStyleEl.value]) {
-        total += weightMap[premiumStyleEl.value];
-      }
+      // Removed redundant premium style weight addition
 
       const selects = document.querySelectorAll('#styleOptions select');
       selects.forEach(sel => {
