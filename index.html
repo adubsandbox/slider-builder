@@ -34,6 +34,9 @@
     h3, p {
       margin-top: 20px;
     }
+    .hidden {
+      display: none;
+    }
     @media (min-width: 600px) {
       select {
         font-size: 1.1rem;
@@ -44,66 +47,103 @@
 <body>
   <h2>SOB Builder Weight Calculator</h2>
 
-  <label>Body:
-    <select id="body" onchange="updateWeight()">
+  <label>Body Budget:
+    <select id="budget" onchange="handleBudgetChange()">
       <option value="">Select...</option>
-      <option value="11">3D Print</option>
-      <option value="12">3D Print Divot</option>
-      <option value="8">3D Print Slim</option>
-      <option value="56">SS</option>
-      <option value="48">SS Slim</option>
+      <option value="budget">Budget</option>
+      <option value="premium">Premium</option>
     </select>
   </label>
 
-  <label>Didget Material:
-    <select id="didget" onchange="updateWeight()">
-      <option value="">Select...</option>
-      <option value="2">Ti</option>
-      <option value="2">Zirc</option>
-      <option value="1">Al</option>
-      <option value="4">Cu</option>
-    </select>
-  </label>
+  <div id="budgetStyles" class="hidden">
+    <label>Budget Body Style:
+      <select id="body" onchange="updateWeight()">
+        <option value="">Select...</option>
+        <option value="11">3D Print</option>
+        <option value="12">3D Print Divot</option>
+        <option value="8">3D Print Slim</option>
+      </select>
+    </label>
+  </div>
 
-  <label>Cage:
-    <select id="cage" onchange="updateWeight()">
-      <option value="">Select...</option>
-      <option value="6">Al</option>
-      <option value="7">AlBeta</option>
-      <option value="20">Brass</option>
-      <option value="24">BrassBeta</option>
-      <option value="2">Acrylic</option>
-    </select>
-  </label>
+  <div id="premiumStyles" class="hidden">
+    <label>Premium Body Style:
+      <select id="body" onchange="updateWeight()">
+        <option value="">Select...</option>
+        <option value="56">SS</option>
+        <option value="48">SS Slim</option>
+      </select>
+    </label>
+  </div>
 
-  <label>Plate:
-    <select id="plate" onchange="updateWeight()">
-      <option value="">Select...</option>
-      <option value="11">SS</option>
-      <option value="16">SS Pro</option>
-      <option value="15">DC SS Pro</option>
-      <option value="12">Zirc Pro</option>
-      <option value="14">SS (alt)</option>
-      <option value="17">SSBeta</option>
-      <option value="2">Acrylic</option>
-    </select>
-  </label>
+  <div id="extraFields" class="hidden">
+    <label>Didget Material:
+      <select id="didget" onchange="updateWeight()">
+        <option value="">Select...</option>
+        <option value="2">Ti</option>
+        <option value="2">Zirc</option>
+        <option value="1">Al</option>
+        <option value="4">Cu</option>
+      </select>
+    </label>
 
-  <label>Inlay:
-    <select id="inlay" onchange="updateWeight()">
-      <option value="">Select...</option>
-      <option value="1">CarbonFiber</option>
-      <option value="4">Brass</option>
-      <option value="4">Copper</option>
-      <option value="2">Ti</option>
-      <option value="2">Zirc</option>
-    </select>
-  </label>
+    <label>Cage:
+      <select id="cage" onchange="updateWeight()">
+        <option value="">Select...</option>
+        <option value="6">Al</option>
+        <option value="7">AlBeta</option>
+        <option value="20">Brass</option>
+        <option value="24">BrassBeta</option>
+        <option value="2">Acrylic</option>
+      </select>
+    </label>
+
+    <label>Plate:
+      <select id="plate" onchange="updateWeight()">
+        <option value="">Select...</option>
+        <option value="11">SS</option>
+        <option value="16">SS Pro</option>
+        <option value="15">DC SS Pro</option>
+        <option value="12">Zirc Pro</option>
+        <option value="14">SS (alt)</option>
+        <option value="17">SSBeta</option>
+        <option value="2">Acrylic</option>
+      </select>
+    </label>
+
+    <label>Inlay:
+      <select id="inlay" onchange="updateWeight()">
+        <option value="">Select...</option>
+        <option value="1">CarbonFiber</option>
+        <option value="4">Brass</option>
+        <option value="4">Copper</option>
+        <option value="2">Ti</option>
+        <option value="2">Zirc</option>
+      </select>
+    </label>
+  </div>
 
   <h3>Total Weight: <span id="total">8</span>g</h3>
   <p>(Includes 8g for magnets & o-rings)</p>
 
   <script>
+    function handleBudgetChange() {
+      const budget = document.getElementById('budget').value;
+      document.getElementById('budgetStyles').classList.add('hidden');
+      document.getElementById('premiumStyles').classList.add('hidden');
+      document.getElementById('extraFields').classList.add('hidden');
+
+      if (budget === 'budget') {
+        document.getElementById('budgetStyles').classList.remove('hidden');
+        document.getElementById('extraFields').classList.remove('hidden');
+      } else if (budget === 'premium') {
+        document.getElementById('premiumStyles').classList.remove('hidden');
+        document.getElementById('extraFields').classList.remove('hidden');
+      }
+
+      updateWeight();
+    }
+
     function updateWeight() {
       let base = 8;
       let body = parseInt(document.getElementById('body').value) || 0;
