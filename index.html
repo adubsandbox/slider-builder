@@ -103,6 +103,15 @@
 
   <script>
     const weightMap = {
+      'Aluminum': 1,
+      'Blue Ti': 2,
+      'Purple Ti': 2,
+      'Yellow Ti': 2,
+      'Flame Ti': 2,
+      'Acid Ti': 2,
+      'Ti': 2,
+      'Copper': 2,
+      'Brass': 4,
       'Aluminum Slim': 0,
       'Brass Slim': 51,
       'Copper Slim': 0,
@@ -301,8 +310,8 @@
     }
 
     function buildDidgetSelect() {
-      const options = ['Aluminum', 'Brass', 'Copper', 'Ti', 'Blue Ti', 'Purple Ti', 'Yellow Ti', 'Flame Ti', 'Acid Ti'];
-      return buildColorSelect('Slim Didget Material', options);
+  const options = ['Aluminum', 'Blue Ti', 'Purple Ti', 'Yellow Ti', 'Flame Ti', 'Acid Ti', 'Ti', 'Copper', 'Brass'];
+  return buildColorSelect('Slim Didget Material', options);
     }
 
     function buildMaterialSelect(label, options) {
