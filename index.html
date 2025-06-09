@@ -194,7 +194,7 @@
       const style = document.getElementById('premiumBodyStyle').value;
       clearStyleOptions();
       let html = '';
-      if (style === 'standard') // Premium Standard logic {
+      if (style === 'standard') { // Premium Standard logic
         const bodyMaterials = [
   { value: 'Brass (Premium)', label: 'Brass (Premium)', weight: 60 },
   { value: 'Aluminum', label: 'Aluminum (TBD)', weight: null },
@@ -229,7 +229,7 @@
             });
           });
         }, 0);
-      } else if (style === 'slim') // Premium Slim logic {
+      } else if (style === 'slim') { // Premium Slim logic
         html += buildDidgetSelect();
         html += buildCageSelect();
         html += buildPlateSelect();
