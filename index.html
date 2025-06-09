@@ -56,102 +56,179 @@
   </label>
 
   <div id="budgetStyles" class="hidden">
-    <label>Budget Body Style:
-      <select id="body" onchange="updateWeight()">
+    <label>Body Style:
+      <select id="budgetBodyStyle" onchange="handleBudgetBodyStyle()">
         <option value="">Select...</option>
-        <option value="11">3D Print</option>
-        <option value="12">3D Print Divot</option>
-        <option value="8">3D Print Slim</option>
+        <option value="standard">Standard</option>
+        <option value="divot">Divot</option>
+        <option value="slim">Slim</option>
+        <option value="trider">Trider</option>
+        <option value="slimtrider">Slim Trider</option>
       </select>
     </label>
   </div>
 
   <div id="premiumStyles" class="hidden">
-    <label>Premium Body Style:
-      <select id="body" onchange="updateWeight()">
+    <label>Body Style:
+      <select id="premiumBodyStyle" onchange="handlePremiumBodyStyle()">
         <option value="">Select...</option>
-        <option value="56">SS</option>
-        <option value="48">SS Slim</option>
+        <option value="standard">Standard</option>
+        <option value="slim">Slim</option>
       </select>
     </label>
   </div>
 
-  <div id="extraFields" class="hidden">
-    <label>Didget Material:
-      <select id="didget" onchange="updateWeight()">
-        <option value="">Select...</option>
-        <option value="2">Ti</option>
-        <option value="2">Zirc</option>
-        <option value="1">Al</option>
-        <option value="4">Cu</option>
-      </select>
-    </label>
-
-    <label>Cage:
-      <select id="cage" onchange="updateWeight()">
-        <option value="">Select...</option>
-        <option value="6">Al</option>
-        <option value="7">AlBeta</option>
-        <option value="20">Brass</option>
-        <option value="24">BrassBeta</option>
-        <option value="2">Acrylic</option>
-      </select>
-    </label>
-
-    <label>Plate:
-      <select id="plate" onchange="updateWeight()">
-        <option value="">Select...</option>
-        <option value="11">SS</option>
-        <option value="16">SS Pro</option>
-        <option value="15">DC SS Pro</option>
-        <option value="12">Zirc Pro</option>
-        <option value="14">SS (alt)</option>
-        <option value="17">SSBeta</option>
-        <option value="2">Acrylic</option>
-      </select>
-    </label>
-
-    <label>Inlay:
-      <select id="inlay" onchange="updateWeight()">
-        <option value="">Select...</option>
-        <option value="1">CarbonFiber</option>
-        <option value="4">Brass</option>
-        <option value="4">Copper</option>
-        <option value="2">Ti</option>
-        <option value="2">Zirc</option>
-      </select>
-    </label>
-  </div>
+  <div id="styleOptions"></div>
 
   <h3>Total Weight: <span id="total">8</span>g</h3>
   <p>(Includes 8g for magnets & o-rings)</p>
 
   <script>
+    const weightMap = {
+      '3D Print': 11,
+      '3D Print Divot': 12,
+      '3D Print Slim': 8,
+      'SS': 56,
+      'SS Slim': 48,
+      'Ti': 2,
+      'Zirc': 2,
+      'Al': 1,
+      'Cu': 4,
+      'Aluminum - Light': 6,
+      'Stainless Steel - Heavy': 7,
+      'Brass - Heaviest': 20,
+      'ED TPU Cage Set': 2,
+      'Stainless Steel': 11,
+      'Zirconium': 12,
+      'Teflon Beta Plates': 15,
+      'Pro Stainless Steel Plates': 16,
+      'Pro Swoosh Stainless Steel Plates': 14,
+      'Pro Zirconium Plates': 12,
+      'Carbon Fiber Weave': 1,
+      'Forged Carbon Fiber': 1,
+      'Brass': 4,
+      'Copper': 4,
+      'Flamed Copper': 4,
+      'Raw Titanium': 2,
+      'Flamed Titanium': 2,
+      'Purple Titanium': 2,
+      'Blue Titanium': 2,
+      'Yellow Titanium': 2,
+      'Acid Titanium': 2,
+      'Zirconium Inlay': 2
+    };
+
+    function clearStyleOptions() {
+      document.getElementById('styleOptions').innerHTML = '';
+    }
+
     function handleBudgetChange() {
       const budget = document.getElementById('budget').value;
       document.getElementById('budgetStyles').classList.add('hidden');
       document.getElementById('premiumStyles').classList.add('hidden');
-      document.getElementById('extraFields').classList.add('hidden');
+      clearStyleOptions();
 
       if (budget === 'budget') {
         document.getElementById('budgetStyles').classList.remove('hidden');
-        document.getElementById('extraFields').classList.remove('hidden');
       } else if (budget === 'premium') {
         document.getElementById('premiumStyles').classList.remove('hidden');
-        document.getElementById('extraFields').classList.remove('hidden');
       }
-
       updateWeight();
+    }
+
+    function handleBudgetBodyStyle() {
+      const style = document.getElementById('budgetBodyStyle').value;
+      clearStyleOptions();
+      let html = '';
+      if (style === 'standard') {
+        html += buildColorSelect('Body Color', ['black', 'blue', 'green', 'red', 'white', 'yellow', 'pink']);
+        html += buildCageSelect();
+        html += buildPlateSelect();
+      } else if (style === 'divot') {
+        html += buildColorSelect('Divot Color', ['black', 'white', 'green']);
+        html += buildInlaySelect();
+        html += buildCageSelect();
+        html += buildPlateSelect();
+      } else if (style === 'slim') {
+        html += buildColorSelect('Slim Color', ['black', 'white', 'green silver', 'red', 'yellow', 'light blue', 'shifting green', 'shifting red', 'green glow', 'blue glow']);
+        html += buildDidgetSelect();
+        html += buildCageSelect();
+        html += buildPlateSelect();
+      } else if (style === 'trider') {
+        html += buildColorSelect('Trider Body Color', ['black', 'green', 'red', 'blue', 'yellow', 'pink', 'white']);
+        html += buildCageSelect(['Aluminum - Light', 'Stainless Steel - Heavy', 'Brass - Heaviest']);
+        html += buildPlateSelect(['Stainless Steel']);
+      } else if (style === 'slimtrider') {
+        html += buildColorSelect('Slim Trider Color', ['black', 'silver']);
+        html += buildDidgetSelect();
+        html += buildCageSelect(['Aluminum - Light', 'Stainless Steel - Heavy', 'Brass - Heaviest']);
+        html += buildPlateSelect(['Stainless Steel']);
+      }
+      document.getElementById('styleOptions').innerHTML = html;
+    }
+
+    function handlePremiumBodyStyle() {
+      const style = document.getElementById('premiumBodyStyle').value;
+      clearStyleOptions();
+      let html = '';
+      if (style === 'standard') {
+        html += buildMaterialSelect('Premium Body Material', ['Aluminum', 'Brass', 'Copper', 'Ultem', 'Crystal Titanium', 'Stainless Steel', 'Zirconium']);
+        html += buildInlaySelect();
+        html += buildCageSelect();
+        html += buildPlateSelect();
+      } else if (style === 'slim') {
+        html += buildDidgetSelect();
+        html += buildCageSelect();
+        html += buildPlateSelect();
+      }
+      document.getElementById('styleOptions').innerHTML = html;
+    }
+
+    function buildColorSelect(label, options) {
+      return `
+        <label>${label}:
+          <select onchange="updateWeight()">
+            <option value="">Select...</option>
+            ${options.map(o => `<option value="${o}">${o}</option>`).join('')}
+          </select>
+        </label>
+      `;
+    }
+
+    function buildCageSelect(overrideOptions) {
+      const options = overrideOptions || ['Aluminum - Light', 'Stainless Steel - Heavy', 'Brass - Heaviest', 'ED TPU Cage Set'];
+      return buildColorSelect('Magnet Cage', options);
+    }
+
+    function buildPlateSelect(overrideOptions) {
+      const options = overrideOptions || ['Stainless Steel', 'Zirconium', 'Teflon Beta Plates', 'Pro Stainless Steel Plates', 'Pro Swoosh Stainless Steel Plates', 'Pro Zirconium Plates'];
+      return buildColorSelect('Plate Material', options);
+    }
+
+    function buildInlaySelect() {
+      const options = ['Carbon Fiber Weave', 'Forged Carbon Fiber', 'Brass', 'Copper', 'Flamed Copper', 'Raw Titanium', 'Flamed Titanium', 'Purple Titanium', 'Blue Titanium', 'Yellow Titanium', 'Acid Titanium', 'Zirconium Inlay'];
+      return buildColorSelect('Inlay Material', options);
+    }
+
+    function buildDidgetSelect() {
+      const options = ['Aluminum', 'Brass', 'Copper', 'Ti', 'Blue Ti', 'Purple Ti', 'Yellow Ti', 'Flame Ti', 'Acid Ti'];
+      return buildColorSelect('Slim Didget Material', options);
+    }
+
+    function buildMaterialSelect(label, options) {
+      return buildColorSelect(label, options);
     }
 
     function updateWeight() {
       let base = 8;
-      let body = parseInt(document.getElementById('body').value) || 0;
-      let didget = parseInt(document.getElementById('didget').value) || 0;
-      let cage = parseInt(document.getElementById('cage').value) || 0;
-      let plate = parseInt(document.getElementById('plate').value) || 0;
-      let inlay = parseInt(document.getElementById('inlay').value) || 0;
-      let total = base + body + didget + cage + plate + inlay;
+      let selects = document.querySelectorAll('#styleOptions select');
+      let total = base;
+      selects.forEach(sel => {
+        let val = sel.value;
+        if (val && weightMap[val]) {
+          total += weightMap[val];
+        }
+      });
       document.getElementById('total').innerText = total;
     }
   </script>
