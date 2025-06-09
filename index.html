@@ -64,8 +64,10 @@
     <p style="font-size: 0.95em;"><strong>Slider Sizes</strong><br>Regular: 30mm × 46mm × 18mm<br>Slim: 30mm × 46mm × 14mm</p>
     <label>Body Budget:
       <select id="budget" onchange="handleBudgetChange(); updateWeight();">
-        <option value=\"${mat.label}${mat.weight ? ` (${mat.weight}g)` : ''}</option>`).join('')}
-  </select>
+  <option value="">-- Select Budget --</option>
+  <option value="budget">Budget</option>
+  <option value="premium">Premium</option>
+</select>
 </label>`;
     html += `<div id="crystalTitaniumColorContainer" class="hidden">${buildColorSelect('Crystal Titanium Color', ['RAW', 'Purple', 'Blue', 'Green'])}</div>`;
     html += buildInlaySelect();
