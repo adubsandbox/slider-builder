@@ -74,9 +74,9 @@
       <label>Body Style:
         <select id="budgetBodyStyle" onchange="handleBudgetBodyStyle()">
           <option value="">-- Select Style --</option>
-          <option value="standard">Standard 3D Print</option>
-          <option value="divot">3D Print Divot</option>
-          <option value="slim">3D Print Slim</option>
+          <option value="3D Print">Standard 3D Print (11g)</option>
+          <option value="3D Print Divot">3D Print Divot (12g)</option>
+          <option value="3D Print Slim">3D Print Slim (8g)</option>
           <option value="trider">3D Trider</option>
           <option value="slimtrider">3D Slim Trider</option>
         </select>
@@ -154,6 +154,9 @@ $1<span id="total">8.00</span>g</h3>
 
     function handleBudgetBodyStyle() {
       const style = document.getElementById('budgetBodyStyle').value;
+      if (weightMap[style]) {
+        styleWeight = weightMap[style];
+      }
       clearStyleOptions();
       let html = '';
       if (style === 'standard') {
@@ -262,6 +265,7 @@ $1<span id="total">8.00</span>g</h3>
       let base = 8;
       let selects = document.querySelectorAll('#styleOptions select');
       let total = base;
+      if (typeof styleWeight !== 'undefined') total += styleWeight;
       selects.forEach(sel => {
         let val = sel.value;
         if (val && weightMap[val]) {
