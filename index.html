@@ -1,51 +1,64 @@
 <!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SOB Builder Weight Calculator</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>S.O.B. Weight Calculator</title>
   <style>
     :root { color-scheme: dark; }
     body {
+      background-color: #121212;
+      color: #f0f0f0;
       font-family: sans-serif;
       margin: 0;
       padding: 20px;
-      background-color: #121212;
-      color: #f0f0f0;
     }
     .container {
       width: 100%;
       max-width: 500px;
-      margin: 0 auto;
+      margin: auto;
       text-align: center;
     }
-    h2 { color: #00ccff; margin-bottom: 20px; }
-    label { display: block; margin: 15px 0 5px; text-align: center; }
+    h2 {
+      color: #00ccff;
+      margin-bottom: 10px;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+    }
     select {
       width: 100%;
       max-width: 400px;
       padding: 10px;
-      font-size: 1rem;
       background-color: #1e1e1e;
       color: #f0f0f0;
       border: 1px solid #444;
       border-radius: 4px;
-      margin: 0 auto 10px;
-      display: block;
+      font-size: 1rem;
+      margin-bottom: 10px;
     }
     h3 {
       margin-top: 30px;
       color: #00ff66;
       font-size: 1.8em;
     }
-    p { font-size: 0.9em; color: #999; }
-    .hidden { display: none; }
+    a {
+      color: #00ccff;
+      text-decoration: none;
+      display: block;
+      margin-top: 10px;
+    }
+    p {
+      font-size: 0.9em;
+      color: #999;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <h2>S.O.B. Weight Calculator</h2>
-    <p><strong>Slider Sizes</strong><br>Regular: 30mm × 46mm × 18mm<br>Slim: 30mm × 46mm × 14mm</p><label>Body Budget:
-  <select id="budget" onchange="handleBudgetChange(); updateWeight();">
+    <p><strong>Slider Sizes</strong><br />Regular: 30mm × 46mm × 18mm<br />Slim: 30mm × 46mm × 14mm</p><label>Body Budget:
+  <select id="budget" onchange="handleBudgetChange()">
     <option value="">-- Select Budget --</option>
     <option value="budget">Budget</option>
     <option value="premium">Premium</option>
@@ -56,43 +69,33 @@
 
 <h3><span id="total">8.00</span>g</h3>
 <p>* Includes 8g for o-rings and magnets</p>
-<a href="https://www.fidgetthings.com/products/s-o-b-builder" target="_blank" style="color: #00ccff;">🔗 Open the Official FidgetThings S.O.B. Builder</a>
+<a href="https://www.fidgetthings.com/products/s-o-b-builder" target="_blank">🔗 Open the Official FidgetThings S.O.B. Builder</a>
 
   </div>  <script>
     const weightMap = {
-      '3D Print': 11,
-      '3D Print Divot': 12,
-      '3D Print Slim': 8,
-      'trider': 0,
-      'slimtrider': 0,
-      'Aluminum': 1,
-      'Blue Ti': 2,
-      'Purple Ti': 2,
-      'Yellow Ti': 2,
-      'Flame Ti': 2,
-      'Acid Ti': 2,
-      'Ti': 2,
-      'Copper': 2,
-      'Brass': 4,
-      'Brass (Premium)': 60,
-      'Brass Slim': 51,
-      'Stainless Steel Slim': 48,
-      'Magnet Cage - Aluminum': 6,
-      'Magnet Cage - Stainless Steel': 20,
-      'Magnet Cage - Brass': 24,
-      'Plate - Stainless Steel': 11,
-      'Plate - Zirconium': 12,
-      'Plate - Teflon Beta': 0,
-      'Plate - Pro Stainless Steel': 16,
-      'Plate - Pro Swoosh Stainless Steel': 15,
-      'Plate - Pro Zirconium': 12
+      "3D Print": 11,
+      "3D Print Divot": 12,
+      "3D Print Slim": 8,
+      "trider": 0,
+      "slimtrider": 0,
+      "Aluminum": 1,
+      "Blue Ti": 2,
+      "Purple Ti": 2,
+      "Yellow Ti": 2,
+      "Flame Ti": 2,
+      "Acid Ti": 2,
+      "Ti": 2,
+      "Copper": 2,
+      "Brass": 4,
+      "Brass (Premium)": 60,
+      "Brass Slim": 51,
+      "Stainless Steel Slim": 48
     };
 
     function updateWeight() {
       let base = 8;
       let total = base;
-      const selects = document.querySelectorAll('#styleOptions select');
-      selects.forEach(sel => {
+      document.querySelectorAll('#styleOptions select').forEach(sel => {
         const val = sel.value;
         if (val && weightMap[val] !== undefined) {
           total += weightMap[val];
@@ -106,139 +109,24 @@
       const styleOptions = document.getElementById('styleOptions');
       let html = '';
       if (budget === 'budget') {
-        html += `<div id="budgetStyle">
-          <label>Body Style:
-            <select id="budgetBodyStyle" onchange="handleBudgetBodyStyle()">
-              <option value="">-- Select Style --</option>
-              <option value="3D Print">Standard 3D Print (11g)</option>
-              <option value="3D Print Divot">3D Print Divot (12g)</option>
-              <option value="3D Print Slim">3D Print Slim (8g)</option>
-              <option value="trider">3D Trider (0g)</option>
-              <option value="slimtrider">3D Slim Trider (0g)</option>
-            </select>
-          </label>
-        </div>
-        <div id="budgetExtras"></div>`;
+        html += `<label>Body Style:
+          <select onchange="updateWeight()">
+            <option value="3D Print">Standard 3D Print (11g)</option>
+            <option value="3D Print Divot">3D Print Divot (12g)</option>
+            <option value="3D Print Slim">3D Print Slim (8g)</option>
+            <option value="trider">3D Trider (0g)</option>
+            <option value="slimtrider">3D Slim Trider (0g)</option>
+          </select>
+        </label>`;
       } else if (budget === 'premium') {
-        html += `<div id="premiumStyle">
-          <label>Body Style:
-            <select id="premiumBodyStyle" onchange="handlePremiumBodyStyle()">
-              <option value="">-- Select Style --</option>
-              <option value="standard">Standard</option>
-              <option value="slim">Slim</option>
-            </select>
-          </label>
-        </div>
-        <div id="premiumExtras"></div>`;
+        html += `<label>Body Style:
+          <select onchange="updateWeight()">
+            <option value="standard">Standard</option>
+            <option value="slim">Slim</option>
+          </select>
+        </label>`;
       }
       styleOptions.innerHTML = html;
-    }
-
-    function handlePremiumBodyStyle() {
-      const style = document.getElementById('premiumBodyStyle').value;
-      const extras = document.getElementById('premiumExtras');
-      let html = '';
-
-      if (style === 'standard') {
-        html += `<label>Premium Body Material:
-          <select onchange="updateWeight()">
-            <option value="">Select...</option>
-            <option value="Brass (Premium)">Brass (Premium) (60g)</option>
-            <option value="Aluminum">Aluminum (0g)</option>
-            <option value="Copper">Copper (0g)</option>
-            <option value="Ultem">Ultem (0g)</option>
-            <option value="Crystal Titanium">Crystal Titanium (0g)</option>
-            <option value="Stainless Steel">Stainless Steel (0g)</option>
-            <option value="Zirconium">Zirconium (0g)</option>
-          </select>
-        </label>`;
-      } else if (style === 'slim') {
-        html += `<label>Premium Body Material Slim:
-          <select onchange="updateWeight()">
-            <option value="">Select...</option>
-            <option value="Aluminum Slim">Aluminum Slim (0g)</option>
-            <option value="Brass Slim">Brass Slim (51g)</option>
-            <option value="Copper Slim">Copper Slim (0g)</option>
-            <option value="Stainless Steel Slim">Stainless Steel Slim (48g)</option>
-            <option value="Ultem Slim">Ultem Slim (0g)</option>
-            <option value="Aluminum Burst Slim">Aluminum Burst Slim (0g)</option>
-            <option value="Brass Burst Slim">Brass Burst Slim (0g)</option>
-            <option value="Copper Burst Slim">Copper Burst Slim (0g)</option>
-            <option value="Stainless Steel Burst Slim">Stainless Steel Burst Slim (0g)</option>
-          </select>
-        </label>`;
-      }
-
-      html += `<label>Magnet Cage:
-        <select onchange="updateWeight()">
-          <option value="">Select...</option>
-          <option value="Magnet Cage - Aluminum">Aluminum - Light (6g)</option>
-          <option value="Magnet Cage - Stainless Steel">Stainless Steel - Heavy (20g)</option>
-          <option value="Magnet Cage - Brass">Brass - Heaviest (24g)</option>
-        </select>
-      </label>`;
-
-      html += `<label>Plate Material:
-        <select onchange="updateWeight()">
-          <option value="">Select...</option>
-          <option value="Plate - Stainless Steel">Stainless Steel (11g)</option>
-          <option value="Plate - Zirconium">Zirconium (12g)</option>
-          <option value="Plate - Teflon Beta">Teflon Beta Plates (0g)</option>
-          <option value="Plate - Pro Stainless Steel">Pro Stainless Steel Plates (16g)</option>
-          <option value="Plate - Pro Swoosh Stainless Steel">Pro Swoosh Stainless Steel Plates (15g)</option>
-          <option value="Plate - Pro Zirconium">Pro Zirconium Plates (12g)</option>
-        </select>
-      </label>`;
-
-      extras.innerHTML = html;
-      updateWeight();
-    }
-
-    function handleBudgetBodyStyle() {
-      const style = document.getElementById('budgetBodyStyle').value;
-      const extras = document.getElementById('budgetExtras');
-      let html = '';
-
-      if (style === '3D Print Slim') {
-        html += `<label>Slim Didget Material:
-          <select onchange="updateWeight()">
-            <option value="">Select...</option>
-            <option value="Aluminum">Aluminum (1g)</option>
-            <option value="Blue Ti">Blue Ti (2g)</option>
-            <option value="Purple Ti">Purple Ti (2g)</option>
-            <option value="Yellow Ti">Yellow Ti (2g)</option>
-            <option value="Flame Ti">Flame Ti (2g)</option>
-            <option value="Acid Ti">Acid Ti (2g)</option>
-            <option value="Ti">Ti (2g)</option>
-            <option value="Brass">Brass (4g)</option>
-            <option value="Copper">Copper (2g)</option>
-          </select>
-        </label>`;
-      }
-
-      html += `<label>Magnet Cage:
-        <select onchange="updateWeight()">
-          <option value="">Select...</option>
-          <option value="Magnet Cage - Aluminum">Aluminum - Light (6g)</option>
-          <option value="Magnet Cage - Stainless Steel">Stainless Steel - Heavy (20g)</option>
-          <option value="Magnet Cage - Brass">Brass - Heaviest (24g)</option>
-        </select>
-      </label>`;
-
-      html += `<label>Plate Material:
-        <select onchange="updateWeight()">
-          <option value="">Select...</option>
-          <option value="Plate - Stainless Steel">Stainless Steel (11g)</option>
-          <option value="Plate - Zirconium">Zirconium (12g)</option>
-          <option value="Plate - Teflon Beta">Teflon Beta Plates (0g)</option>
-          <option value="Plate - Pro Stainless Steel">Pro Stainless Steel Plates (16g)</option>
-          <option value="Plate - Pro Swoosh Stainless Steel">Pro Swoosh Stainless Steel Plates (15g)</option>
-          <option value="Plate - Pro Zirconium">Pro Zirconium Plates (12g)</option>
-        </select>
-      </label>`;
-
-      extras.innerHTML = html;
-      updateWeight();
       updateWeight();
     }
   </script></body>
