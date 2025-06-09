@@ -60,8 +60,7 @@
 </head>
 <body>
   <div class="container">
-  <p style="font-size: 0.85em; color: #ff4c4c; margin-bottom: 10px;">* Red options indicate weight is TBD (0g placeholder)</p>
-    <h2>S.O.B. Weight Calculator</h2>
+      <h2>S.O.B. Weight Calculator</h2>
     <p style="font-size: 0.95em;"><strong>Slider Sizes</strong><br>Regular: 30mm × 46mm × 18mm<br>Slim: 30mm × 46mm × 14mm</p>
     <label>Body Budget:
       <select id="budget" onchange="handleBudgetChange()">
@@ -78,8 +77,8 @@
           <option value="3D Print">Standard 3D Print (11g)</option>
           <option value="3D Print Divot">3D Print Divot (12g)</option>
           <option value="3D Print Slim">3D Print Slim (8g)</option>
-          <option value="trider">3D Trider (TBD)</option>
-          <option value="slimtrider">3D Slim Trider (TBD)</option>
+          <option value="trider">3D Trider (0g)</option>
+          <option value="slimtrider">3D Slim Trider (0g)</option>
         </select>
       </label>
     </div>
@@ -200,12 +199,12 @@
       if (style === 'standard') { // Premium Standard logic
         const bodyMaterials = [
   { value: 'Brass (Premium)', label: 'Brass (Premium)', weight: 60 },
-  { value: 'Aluminum', label: 'Aluminum (TBD)', weight: null },
-  { value: 'Copper', label: 'Copper (TBD)', weight: null },
-  { value: 'Ultem', label: 'Ultem (TBD)', weight: null },
-  { value: 'Crystal Titanium', label: 'Crystal Titanium (TBD)', weight: null },
-  { value: 'Stainless Steel', label: 'Stainless Steel (TBD)', weight: null },
-  { value: 'Zirconium', label: 'Zirconium (TBD)', weight: null }
+  { value: 'Aluminum', label: 'Aluminum (0g)', weight: null },
+  { value: 'Copper', label: 'Copper (0g)', weight: null },
+  { value: 'Ultem', label: 'Ultem (0g)', weight: null },
+  { value: 'Crystal Titanium', label: 'Crystal Titanium (0g)', weight: null },
+  { value: 'Stainless Steel', label: 'Stainless Steel (0g)', weight: null },
+  { value: 'Zirconium', label: 'Zirconium (0g)', weight: null }
 ];
         html += `<label>Premium Body Material:
   <select onchange="updateWeight()">
