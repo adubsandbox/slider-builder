@@ -1,174 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>S.O.B. Weight Calculator</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOB Builder Weight Calculator</title>
   <style>
-    * {
-      box-sizing: border-box;
+    :root {
+      color-scheme: dark;
     }
     body {
-      font-family: Arial, sans-serif;
+      font-family: sans-serif;
+      padding: 20px;
       background-color: #121212;
       color: #f0f0f0;
-      padding: 16px;
-      margin: 0;
-    }
-    .container {
-      max-width: 420px;
-      margin: auto;
-    }
-    h2 {
-      text-align: center;
-      color: #00ccff;
-      font-size: 1.8em;
-      margin-top: 10px;
-      margin-bottom: 0.5em;
-    }
-    a {
-      text-decoration: none;
-      color: #66ccff;
-      font-weight: bold;
-    }
-    a:hover {
-      text-decoration: underline;
     }
     label {
       display: block;
-      margin-bottom: 1.2em;
-      font-size: 1em;
+      margin: 15px 0 5px;
     }
     select {
       width: 100%;
+      max-width: 400px;
       padding: 10px;
-      font-size: 1em;
-      margin-top: 6px;
-      background-color: #1f1f1f;
+      font-size: 1rem;
+      background-color: #1e1e1e;
       color: #f0f0f0;
       border: 1px solid #444;
-      border-radius: 6px;
+      border-radius: 4px;
     }
-    #total-weight {
-      font-size: 2em;
-      font-weight: bold;
-      text-align: center;
-      margin-top: 1.5em;
-      color: #00ff99;
+    h2 {
+      margin-bottom: 10px;
     }
-    .note {
-      font-size: 0.9em;
-      text-align: center;
-      color: #888;
-      margin-top: 8px;
+    h3, p {
+      margin-top: 20px;
     }
-    .bottom-link {
-      text-align: center;
-      margin-top: 2em;
-      font-size: 1.05em;
-    }
-    @media (max-width: 480px) {
-      h2 {
-        font-size: 1.5em;
-      }
+    @media (min-width: 600px) {
       select {
-        font-size: 0.95em;
-        padding: 10px;
-      }
-      label {
-        font-size: 0.95em;
+        font-size: 1.1rem;
       }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h2>S.O.B. Weight Calculator</h2>
+  <h2>SOB Builder Weight Calculator</h2>
 
-    <label>Bodies:
-      <select class="weight-option">
-        <option value="" data-weight="0">-- Select Body --</option>
-        <option data-weight="11">3D Print (11g)</option>
-        <option data-weight="12">3D Print Divot (12g)</option>
-        <option data-weight="8">3D Print Slim (8g)</option>
-        <option data-weight="56">SS (56g)</option>
-        <option data-weight="48">SS Slim (48g)</option>
-      </select>
-    </label>
+  <label>Body:
+    <select id="body" onchange="updateWeight()">
+      <option value="">Select...</option>
+      <option value="11">3D Print</option>
+      <option value="12">3D Print Divot</option>
+      <option value="8">3D Print Slim</option>
+      <option value="56">SS</option>
+      <option value="48">SS Slim</option>
+    </select>
+  </label>
 
-    <label>Didget Material:
-      <select class="weight-option">
-        <option value="" data-weight="0">-- Select Didget Material --</option>
-        <option data-weight="2">Ti (2g)</option>
-        <option data-weight="2">Zirc (2g)</option>
-        <option data-weight="1">Al (1g)</option>
-        <option data-weight="4">Cu (4g)</option>
-      </select>
-    </label>
+  <label>Didget Material:
+    <select id="didget" onchange="updateWeight()">
+      <option value="">Select...</option>
+      <option value="2">Ti</option>
+      <option value="2">Zirc</option>
+      <option value="1">Al</option>
+      <option value="4">Cu</option>
+    </select>
+  </label>
 
-    <label>Cages:
-      <select class="weight-option">
-        <option value="" data-weight="0">-- Select Cage --</option>
-        <option data-weight="6">Al (6g)</option>
-        <option data-weight="7">AlBeta (7g)</option>
-        <option data-weight="20">Brass (20g)</option>
-        <option data-weight="24">BrassBeta (24g)</option>
-        <option data-weight="2">Acrylic (2g)</option>
-      </select>
-    </label>
+  <label>Cage:
+    <select id="cage" onchange="updateWeight()">
+      <option value="">Select...</option>
+      <option value="6">Al</option>
+      <option value="7">AlBeta</option>
+      <option value="20">Brass</option>
+      <option value="24">BrassBeta</option>
+      <option value="2">Acrylic</option>
+    </select>
+  </label>
 
-    <label>Plates:
-      <select class="weight-option">
-        <option value="" data-weight="0">-- Select Plates --</option>
-        <option data-weight="11">SS (11g)</option>
-        <option data-weight="16">SS Pro (16g)</option>
-        <option data-weight="15">DC SS Pro (15g)</option>
-        <option data-weight="12">Zirc Pro (12g)</option>
-        <option data-weight="14">SS (14g)</option>
-        <option data-weight="17">SSBeta (17g)</option>
-        <option data-weight="2">Acrylic (2g)</option>
-      </select>
-    </label>
+  <label>Plate:
+    <select id="plate" onchange="updateWeight()">
+      <option value="">Select...</option>
+      <option value="11">SS</option>
+      <option value="16">SS Pro</option>
+      <option value="15">DC SS Pro</option>
+      <option value="12">Zirc Pro</option>
+      <option value="14">SS (alt)</option>
+      <option value="17">SSBeta</option>
+      <option value="2">Acrylic</option>
+    </select>
+  </label>
 
-    <label>Inlay:
-      <select class="weight-option">
-        <option value="" data-weight="0">-- Select Inlay --</option>
-        <option data-weight="1">CarbonFiber (1g)</option>
-        <option data-weight="4">Brass (4g)</option>
-        <option data-weight="4">Copper (4g)</option>
-        <option data-weight="2">Ti (2g)</option>
-        <option data-weight="2">Zirc (2g)</option>
-      </select>
-    </label>
+  <label>Inlay:
+    <select id="inlay" onchange="updateWeight()">
+      <option value="">Select...</option>
+      <option value="1">CarbonFiber</option>
+      <option value="4">Brass</option>
+      <option value="4">Copper</option>
+      <option value="2">Ti</option>
+      <option value="2">Zirc</option>
+    </select>
+  </label>
 
-    <div id="total-weight">8.00g</div>
-    <div class="note">* Includes 8g for o-rings and magnets</div>
-
-    <div class="bottom-link">
-      <a href="https://www.fidgetthings.com/products/s-o-b-builder" target="_blank">
-        🔗 Open the Official FidgetThings S.O.B. Builder
-      </a>
-    </div>
-  </div>
+  <h3>Total Weight: <span id="total">8</span>g</h3>
+  <p>(Includes 8g for magnets & o-rings)</p>
 
   <script>
-    const weightInputs = document.querySelectorAll('.weight-option');
-    const weightDisplay = document.getElementById('total-weight');
-
-    weightInputs.forEach(input => {
-      input.addEventListener('change', updateWeight);
-    });
-
     function updateWeight() {
-      let total = 8; // Base weight for o-rings and magnets
-      weightInputs.forEach(select => {
-        const selected = select.options[select.selectedIndex];
-        const weight = parseFloat(selected.dataset.weight);
-        if (!isNaN(weight)) {
-          total += weight;
-        }
-      });
-      weightDisplay.textContent = total.toFixed(2) + 'g';
+      let base = 8;
+      let body = parseInt(document.getElementById('body').value) || 0;
+      let didget = parseInt(document.getElementById('didget').value) || 0;
+      let cage = parseInt(document.getElementById('cage').value) || 0;
+      let plate = parseInt(document.getElementById('plate').value) || 0;
+      let inlay = parseInt(document.getElementById('inlay').value) || 0;
+      let total = base + body + didget + cage + plate + inlay;
+      document.getElementById('total').innerText = total;
     }
   </script>
 </body>
