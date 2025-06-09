@@ -185,11 +185,12 @@
     }
 
     function buildColorSelect(label, options) {
+      const capitalizedOptions = options.map(o => o.charAt(0).toUpperCase() + o.slice(1));
       return `
         <label>${label}:
           <select onchange="updateWeight()">
             <option value="">Select...</option>
-            ${options.map(o => `<option value="${o}">${o}</option>`).join('')}
+            ${capitalizedOptions.map(o => `<option value="${o}">${o}</option>`).join('')}
           </select>
         </label>
       `;
