@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SOB Builder Weight Calculator</title>
   <style>
     :root { color-scheme: dark; }
@@ -63,8 +63,8 @@
       '3D Print': 11,
       '3D Print Divot': 12,
       '3D Print Slim': 8,
-      '3D Trider': 0,
-      '3D Slim Trider': 0,
+      'trider': 0,
+      'slimtrider': 0,
       'Aluminum': 1,
       'Blue Ti': 2,
       'Purple Ti': 2,
@@ -97,25 +97,29 @@
       const styleOptions = document.getElementById('styleOptions');
       let html = '';
       if (budget === 'budget') {
-        html += `<label>Body Style:
-          <select id="budgetBodyStyle" onchange="handleBudgetBodyStyle()">
-            <option value="">-- Select Style --</option>
-            <option value="3D Print">Standard 3D Print (11g)</option>
-            <option value="3D Print Divot">3D Print Divot (12g)</option>
-            <option value="3D Print Slim">3D Print Slim (8g)</option>
-            <option value="3D Trider">3D Print Trider (0g)</option>
-            <option value="3D Slim Trider">3D Print Slim Trider (0g)</option>
-          </select>
-        </label>
+        html += `<div id="budgetStyle">
+          <label>Body Style:
+            <select id="budgetBodyStyle" onchange="handleBudgetBodyStyle()">
+              <option value="">-- Select Style --</option>
+              <option value="3D Print">Standard 3D Print (11g)</option>
+              <option value="3D Print Divot">3D Print Divot (12g)</option>
+              <option value="3D Print Slim">3D Print Slim (8g)</option>
+              <option value="trider">3D Trider (0g)</option>
+              <option value="slimtrider">3D Slim Trider (0g)</option>
+            </select>
+          </label>
+        </div>
         <div id="budgetExtras"></div>`;
       } else if (budget === 'premium') {
-        html += `<label>Body Style:
-          <select id="premiumBodyStyle" onchange="handlePremiumBodyStyle()">
-            <option value="">-- Select Style --</option>
-            <option value="standard">Standard</option>
-            <option value="slim">Slim</option>
-          </select>
-        </label>
+        html += `<div id="premiumStyle">
+          <label>Body Style:
+            <select id="premiumBodyStyle" onchange="handlePremiumBodyStyle()">
+              <option value="">-- Select Style --</option>
+              <option value="standard">Standard</option>
+              <option value="slim">Slim</option>
+            </select>
+          </label>
+        </div>
         <div id="premiumExtras"></div>`;
       }
       styleOptions.innerHTML = html;
@@ -125,177 +129,69 @@
       const style = document.getElementById('budgetBodyStyle').value;
       const extras = document.getElementById('budgetExtras');
       let html = '';
+
       if (style === '3D Print') {
-        html = `<label>Body Color:
-          <select onchange="updateWeight()">
+        html += `<label>Body Color:
+          <select onchange="updateWeight()" oninput="updateWeight()">
             <option value="">-- Select Color --</option>
-            <option>Black</option>
-            <option>Blue</option>
-            <option>Green</option>
-            <option>Red</option>
-            <option>White</option>
-            <option>Yellow</option>
-            <option>Pink</option>
+            <option value="Black">Black</option>
+            <option value="Blue">Blue</option>
+            <option value="Green">Green</option>
+            <option value="Red">Red</option>
+            <option value="White">White</option>
+            <option value="Yellow">Yellow</option>
+            <option value="Pink">Pink</option>
+          </select>
+        </label>`;
+        html += `<label>Magnet Cage:
+          <select onchange="updateWeight()">
+            <option value="">-- Select --</option>
+            <optionAluminum - Light</option>
+            <option>Stainless Steel - Heavy</option>
+            <option>Brass - Heaviest</option>
+            <option>ED TPU Cage Set</option>
+          </select>
+        </label>`;
+        html += `<label>Plate Material:
+          <select onchange="updateWeight()">
+            <option>Stainless Steel</option>
+            <option>Zirconium</option>
+            <option>Teflon Beta Plates</option>
+            <option>Pro Stainless Steel Plates</option>
+            <option>Pro Swoosh Stainless Steel Plates</option>
+            <option>Pro Zirconium Plates</option>
           </select>
         </label>`;
       } else if (style === '3D Print Divot') {
-        html = `<label>Divot Color:
+        html += `<label>Divot Color:
           <select onchange="updateWeight()">
             <option value="">-- Select Color --</option>
-            <option>Black</option>
-            <option>White</option>
-            <option>Green</option>
-          </select>
-        </label>`;
-      } else if (style === '3D Print Slim') {
-        html = `<label>Slim Color:
-          <select onchange="updateWeight()">
-            <option value="">-- Select Color --</option>
-            <option>Black</option>
-            <option>White</option>
-            <option>Green</option>
-            <option>Silver</option>
-            <option>Red</option>
-            <option>Yellow</option>
-            <option>Light Blue</option>
-            <option>Shifting Green</option>
-            <option>Shifting Red</option>
-            <option>Green Glow</option>
-            <option>Blue Glow</option>
-          </select>
-        </label>`;
-      } else if (style === '3D Trider') {
-        html = `<label>Trider Body Color:
-          <select onchange="updateWeight()">
-            <option value="">-- Select Color --</option>
-            <option>Black</option>
-            <option>Green</option>
-            <option>Red</option>
-            <option>Blue</option>
-            <option>Yellow</option>
-            <option>Pink</option>
-            <option>White</option>
-          </select>
-        </label>`;
-      } else if (style === '3D Slim Trider') {
-        html = `<label>Slim Trider Color:
-          <select onchange="updateWeight()">
-            <option value="">-- Select Color --</option>
-            <option>Black</option>
-            <option>Silver</option>
-          </select>
-        </label>`;
-      }
-      extras.innerHTML = html;
-      updateWeight();
-    }
-
-    function handlePremiumBodyStyle() {
-      const style = document.getElementById('premiumBodyStyle').value;
-      const extras = document.getElementById('premiumExtras');
-      let html = '';
-
-      if (style === 'standard') {
-        html += `<label>Premium Body Material:
-          <select id="premiumMaterial" onchange="handlePremiumMaterial()">
-            <option value="">Select...</option>
-            <option value="Brass (Premium)">Brass (60g)</option>
-            <option value="Aluminum">Aluminum (0g)</option>
-            <option value="Copper">Copper (0g)</option>
-            <option value="Ultem">Ultem (0g)</option>
-            <option value="Crystal Titanium">Crystal Titanium (0g)</option>
-            <option value="Stainless Steel">Stainless Steel (0g)</option>
-            <option value="Zirconium">Zirconium (0g)</option>
+            <option value="Black">Black</option>
+            <option value="White">White</option>
+            <option value="Green">Green</option>
           </select>
         </label>
-        <div id="crystalExtras"></div>
         <label>Inlay Material:
           <select onchange="updateWeight()">
-            <option>Carbon Fiber Weave</option>
-            <option>Forged Carbon Fiber</option>
-            <option>Brass</option>
-            <option>Copper</option>
-            <option>Flamed Copper</option>
-            <option>Raw Titanium</option>
-            <option>Flamed Titanium</option>
-            <option>Purple Titanium</option>
-            <option>Blue Titanium</option>
-            <option>Yellow Titanium</option>
-            <option>Acid Titanium</option>
-            <option>Zirconium</option>
-          </select>
-        </label>
-        <label>Magnet Cage:
-          <select onchange="updateWeight()">
-            <option>Aluminum - Light</option>
-            <option>Stainless Steel - Heavy</option>
-            <option>Brass - Heaviest</option>
-            <option>ED TPU Cage Set</option>
-          </select>
-        </label>
-        <label>Plate Material:
-          <select onchange="updateWeight()">
-            <option>Stainless Steel</option>
-            <option>Zirconium</option>
-            <option>Teflon Beta Plates</option>
-            <option>Pro Stainless Steel Plates</option>
-            <option>Pro Swoosh Stainless Steel Plates</option>
-            <option>Pro Zirconium Plates</option>
-          </select>
-        </label>`;
-      } else if (style === 'slim') {
-        html += `<label>Premium Body Material Slim:
-          <select onchange="updateWeight()">
-            <option>Aluminum Slim</option>
-            <option>Brass Slim</option>
-            <option>Copper Slim</option>
-            <option>Stainless Steel Slim</option>
-            <option>Ultem Slim</option>
-            <option>Aluminum Burst Slim</option>
-            <option>Brass Burst Slim</option>
-            <option>Copper Burst Slim</option>
-            <option>Stainless Steel Burst Slim</option>
-          </select>
-        </label>
-        <label>Magnet Cage:
-          <select onchange="updateWeight()">
-            <option>Aluminum - Light</option>
-            <option>Stainless Steel - Heavy</option>
-            <option>Brass - Heaviest</option>
-            <option>ED TPU Cage Set</option>
-          </select>
-        </label>
-        <label>Plate Material:
-          <select onchange="updateWeight()">
-            <option>Stainless Steel</option>
-            <option>Zirconium</option>
-            <option>Teflon Beta Plates</option>
-            <option>Pro Stainless Steel Plates</option>
-            <option>Pro Swoosh Stainless Steel Plates</option>
-            <option>Pro Zirconium Plates</option>
+            <option value="">-- Select Inlay --</option>
+            <option value="Carbon Fiber Weave">Carbon Fiber Weave</option>
+            <option value="Forged Carbon Fiber">Forged Carbon Fiber</option>
+            <option value="Brass">Brass</option>
+            <option value="Copper">Copper</option>
+            <option value="Flamed Copper">Flamed Copper</option>
+            <option value="Raw Titanium">Raw Titanium</option>
+            <option value="Flamed Titanium">Flamed Titanium</option>
+            <option value="Purple Titanium">Purple Titanium</option>
+            <option value="Blue Titanium">Blue Titanium</option>
+            <option value="Yellow Titanium">Yellow Titanium</option>
+            <option value="Acid Titanium">Acid Titanium</option>
+            <option value="Zirconium">Zirconium</option>
           </select>
         </label>`;
       }
 
-      extras.innerHTML = html;
       updateWeight();
-    }
-
-    function handlePremiumMaterial() {
-      const material = document.getElementById('premiumMaterial').value;
-      const crystalExtras = document.getElementById('crystalExtras');
-      if (material === 'Crystal Titanium') {
-        crystalExtras.innerHTML = `<label>Crystal Titanium Color:
-          <select onchange="updateWeight()">
-            <option>RAW</option>
-            <option>Purple</option>
-            <option>Blue</option>
-            <option>Green</option>
-          </select>
-        </label>`;
-      } else {
-        crystalExtras.innerHTML = '';
-      }
+      extras.innerHTML = html;
     }
   </script></body>
 </html>
