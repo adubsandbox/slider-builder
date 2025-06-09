@@ -286,9 +286,15 @@
       let base = 8;
       let total = base;
 
-      const style = document.getElementById('budgetBodyStyle');
-      if (style && weightMap[style.value]) {
-        total += weightMap[style.value];
+      const budgetStyleEl = document.getElementById('budgetBodyStyle');
+      const premiumStyleEl = document.getElementById('premiumBodyStyle');
+
+      if (budgetStyleEl && !budgetStyleEl.closest('.hidden') && weightMap[budgetStyleEl.value]) {
+        total += weightMap[budgetStyleEl.value];
+      }
+
+      if (premiumStyleEl && !premiumStyleEl.closest('.hidden') && weightMap[premiumStyleEl.value]) {
+        total += weightMap[premiumStyleEl.value];
       }
 
       const selects = document.querySelectorAll('#styleOptions select');
