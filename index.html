@@ -103,6 +103,15 @@
 
   <script>
     const weightMap = {
+      'Aluminum Slim': 0,
+      'Brass Slim': 51,
+      'Copper Slim': 0,
+      'Stainless Steel Slim': 48,
+      'Ultem Slim': 0,
+      'Aluminum Burst Slim': 0,
+      'Brass Burst Slim': 0,
+      'Copper Burst Slim': 0,
+      'Stainless Steel Burst Slim': 0,
       'Aluminum': 0,
       'Copper': 0,
       'Ultem': 0,
@@ -231,11 +240,28 @@
           });
         }, 0);
       } else if (style === 'slim') { // Premium Slim logic
+        const slimMaterials = [
+          { value: 'Aluminum Slim', label: 'Aluminum Slim (0g)', weight: 0 },
+          { value: 'Brass Slim', label: 'Brass Slim (51g)', weight: 51 },
+          { value: 'Copper Slim', label: 'Copper Slim (0g)', weight: 0 },
+          { value: 'Stainless Steel Slim', label: 'Stainless Steel Slim (48g)', weight: 48 },
+          { value: 'Ultem Slim', label: 'Ultem Slim (0g)', weight: 0 },
+          { value: 'Aluminum Burst Slim', label: 'Aluminum Burst Slim (0g)', weight: 0 },
+          { value: 'Brass Burst Slim', label: 'Brass Burst Slim (0g)', weight: 0 },
+          { value: 'Copper Burst Slim', label: 'Copper Burst Slim (0g)', weight: 0 },
+          { value: 'Stainless Steel Burst Slim', label: 'Stainless Steel Burst Slim (0g)', weight: 0 }
+        ];
+        html += `<label>Premium Body Material Slim:
+  <select onchange="updateWeight()">
+    <option value="">Select...</option>
+    ${slimMaterials.map(mat => `<option value="${mat.value}" ${mat.weight === null ? 'disabled' : ''}>${mat.label}</option>`).join('')}
+  </select>
+</label>`;
         html += buildDidgetSelect();
         html += buildCageSelect();
         html += buildPlateSelect();
-      }
-      document.getElementById('styleOptions').innerHTML = html;
+
+        setTimeout(() => updateWeight(), 0);
     }
 
     function buildColorSelect(label, options) {
