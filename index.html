@@ -57,8 +57,7 @@
   </style>
 </head>
 <body>
-  $1
-    <p style="font-size: 0.85em; color: #ff4c4c; margin-bottom: 10px;">* Red options indicate weight is TBD (0g placeholder)</p>
+  <p style="font-size: 0.85em; color: #ff4c4c; margin-bottom: 10px;">* Red options indicate weight is TBD (0g placeholder)</p>
     <h2>S.O.B. Weight Calculator</h2>
     <p style="font-size: 0.95em;"><strong>Slider Sizes</strong><br>Regular: 30mm × 46mm × 18mm<br>Slim: 30mm × 46mm × 14mm</p>
     <label>Body Budget:
@@ -216,7 +215,6 @@
         html += buildPlateSelect();
 
         setTimeout(() => {
-          const selects = document.querySelectorAll("#styleOptions select");
           const selects = document.querySelectorAll('#styleOptions select');
       selects.forEach(sel => {
             sel.addEventListener('change', () => {
