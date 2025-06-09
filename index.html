@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,24 +44,21 @@
 <body>
   <div class="container">
     <h2>S.O.B. Weight Calculator</h2>
-    <p><strong>Slider Sizes</strong><br>Regular: 30mm × 46mm × 18mm<br>Slim: 30mm × 46mm × 14mm</p>
+    <p><strong>Slider Sizes</strong><br>Regular: 30mm × 46mm × 18mm<br>Slim: 30mm × 46mm × 14mm</p><label>Body Budget:
+  <select id="budget" onchange="handleBudgetChange(); updateWeight();">
+    <option value="">-- Select Budget --</option>
+    <option value="budget">Budget</option>
+    <option value="premium">Premium</option>
+  </select>
+</label>
 
-    <label>Body Budget:
-      <select id="budget" onchange="handleBudgetChange(); updateWeight();">
-        <option value="">-- Select Budget --</option>
-        <option value="budget">Budget</option>
-        <option value="premium">Premium</option>
-      </select>
-    </label>
+<div id="styleOptions"></div>
 
-    <div id="styleOptions"></div>
+<h3><span id="total">8.00</span>g</h3>
+<p>* Includes 8g for o-rings and magnets</p>
+<a href="https://www.fidgetthings.com/products/s-o-b-builder" target="_blank" style="color: #00ccff;">🔗 Open the Official FidgetThings S.O.B. Builder</a>
 
-    <h3><span id="total">8.00</span>g</h3>
-    <p>* Includes 8g for o-rings and magnets</p>
-    <a href="https://www.fidgetthings.com/products/s-o-b-builder" target="_blank" style="color: #00ccff;">🔗 Open the Official FidgetThings S.O.B. Builder</a>
-  </div>
-
-  <script>
+  </div>  <script>
     const weightMap = {
       '3D Print': 11,
       '3D Print Divot': 12,
@@ -203,6 +199,23 @@
       const extras = document.getElementById('budgetExtras');
       let html = '';
 
+      if (style === '3D Print Slim') {
+        html += `<label>Slim Didget Material:
+          <select onchange="updateWeight()">
+            <option value="">Select...</option>
+            <option value="Aluminum">Aluminum (1g)</option>
+            <option value="Blue Ti">Blue Ti (2g)</option>
+            <option value="Purple Ti">Purple Ti (2g)</option>
+            <option value="Yellow Ti">Yellow Ti (2g)</option>
+            <option value="Flame Ti">Flame Ti (2g)</option>
+            <option value="Acid Ti">Acid Ti (2g)</option>
+            <option value="Ti">Ti (2g)</option>
+            <option value="Brass">Brass (4g)</option>
+            <option value="Copper">Copper (2g)</option>
+          </select>
+        </label>`;
+      }
+
       html += `<label>Magnet Cage:
         <select onchange="updateWeight()">
           <option value="">Select...</option>
@@ -226,7 +239,7 @@
 
       extras.innerHTML = html;
       updateWeight();
+      updateWeight();
     }
-  </script>
-</body>
+  </script></body>
 </html>
