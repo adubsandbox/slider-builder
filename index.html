@@ -201,7 +201,8 @@
 
         setTimeout(() => {
           const selects = document.querySelectorAll("#styleOptions select");
-          selects.forEach(sel => {
+          const selects = document.querySelectorAll('#styleOptions select');
+      selects.forEach(sel => {
             sel.addEventListener('change', () => {
               if (sel.previousSibling && sel.previousSibling.textContent.includes('Premium Body Material')) {
                 const show = sel.value === 'Crystal Titanium';
@@ -263,14 +264,20 @@
     }
 
     function updateWeight() {
-      let styleWeight = 0;
       let base = 8;
+      let total = base;
+      let styleWeight = 0;
+      const style = document.getElementById('budgetBodyStyle');
+      if (style && weightMap[style.value]) {
+        styleWeight = weightMap[style.value];
+        total += styleWeight;
+      }
       const style = document.getElementById('budgetBodyStyle');
       if (style && weightMap[style.value]) {
         styleWeight = weightMap[style.value];
       }
       let total = base + styleWeight;
-      if (typeof styleWeight !== 'undefined') total += styleWeight;
+      
       selects.forEach(sel => {
         let val = sel.value;
         if (val && weightMap[val]) {
