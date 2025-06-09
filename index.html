@@ -77,8 +77,8 @@
           <option value="3D Print">Standard 3D Print (11g)</option>
           <option value="3D Print Divot">3D Print Divot (12g)</option>
           <option value="3D Print Slim">3D Print Slim (8g)</option>
-          <option value="trider">3D Trider</option>
-          <option value="slimtrider">3D Slim Trider</option>
+          <option value="trider">3D Trider (TBD)</option>
+          <option value="slimtrider">3D Slim Trider (TBD)</option>
         </select>
       </label>
     </div>
@@ -265,8 +265,11 @@
     function updateWeight() {
       let styleWeight = 0;
       let base = 8;
-      let selects = document.querySelectorAll('#styleOptions select');
-      let total = base;
+      const style = document.getElementById('budgetBodyStyle');
+      if (style && weightMap[style.value]) {
+        styleWeight = weightMap[style.value];
+      }
+      let total = base + styleWeight;
       if (typeof styleWeight !== 'undefined') total += styleWeight;
       selects.forEach(sel => {
         let val = sel.value;
