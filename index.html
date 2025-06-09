@@ -97,34 +97,41 @@
     }
 
     function handleBudgetChange() {
-      const budget = document.getElementById('budget').value;
-      const styleOptions = document.getElementById('styleOptions');
-      let html = '';
-      if (budget === 'budget') {
-        html += `<label>Body Style:
-          <select id="budgetBodyStyle" onchange="updateWeight()">
-            <option value="">-- Select Style --</option>
-            <option value="3D Print">Standard 3D Print (11g)</option>
-            <option value="3D Print Divot">3D Print Divot (12g)</option>
-            <option value="3D Print Slim">3D Print Slim (8g)</option>
-            <option value="trider">3D Trider (0g)</option>
-            <option value="slimtrider">3D Slim Trider (0g)</option>
-          </select>
-        </label>`;
-      } else if (budget === 'premium') {
-        html += `<label>Body Style:
-          <select id="premiumBodyStyle" onchange="handlePremiumBodyStyle()">
-            <option value="">-- Select Style --</option>
-            <option value="standard">Standard</option>
-            <option value="slim">Slim</option>
-          </select>
-        </label>`;
-      }
-      styleOptions.innerHTML = html;
+  const budget = document.getElementById('budget').value;
+  const styleOptions = document.getElementById('styleOptions');
+  let html = '';
+  if (budget === 'budget') {
+    html += `<div id="budgetStyle">
+      <label>Body Style:
+        <select id="budgetBodyStyle" onchange="handleBudgetBodyStyle()">
+          <option value="">-- Select Style --</option>
+          <option value="3D Print">Standard 3D Print (11g)</option>
+          <option value="3D Print Divot">3D Print Divot (12g)</option>
+          <option value="3D Print Slim">3D Print Slim (8g)</option>
+          <option value="trider">3D Trider (0g)</option>
+          <option value="slimtrider">3D Slim Trider (0g)</option>
+        </select>
+      </label>
+    </div>
+    <div id="budgetExtras"></div>`;
+  } else if (budget === 'premium') {
+    html += `<div id="premiumStyle">
+      <label>Body Style:
+        <select id="premiumBodyStyle" onchange="handlePremiumBodyStyle()">
+          <option value="">-- Select Style --</option>
+          <option value="standard">Standard</option>
+          <option value="slim">Slim</option>
+        </select>
+      </label>
+    </div>
+    <div id="premiumExtras"></div>`;
+  }
+  styleOptions.innerHTML = html;
     }
 
     function handlePremiumBodyStyle() {
   const style = document.getElementById('premiumBodyStyle').value;
+  const extras = document.getElementById('premiumExtras');
   let html = '';
 
   if (style === 'standard') {
@@ -157,10 +164,18 @@
     </label>`;
   }
 
-  document.getElementById('styleOptions').innerHTML += html;
+  extras.innerHTML = html;
   updateWeight();
       updateWeight();
     }
-  </script>
+  function handleBudgetBodyStyle() {
+  const style = document.getElementById('budgetBodyStyle').value;
+  const extras = document.getElementById('budgetExtras');
+  let html = '';
+  // Future logic can go here if you want to add more options
+  extras.innerHTML = html;
+  updateWeight();
+}
+</script>
 </body>
 </html>
