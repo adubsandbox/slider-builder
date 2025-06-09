@@ -266,25 +266,24 @@
     function updateWeight() {
       let base = 8;
       let total = base;
-      let styleWeight = 0;
+
+      // Body style weight from Budget
       const style = document.getElementById('budgetBodyStyle');
       if (style && weightMap[style.value]) {
-        styleWeight = weightMap[style.value];
-        total += styleWeight;
+        total += weightMap[style.value];
       }
-      const style = document.getElementById('budgetBodyStyle');
-      if (style && weightMap[style.value]) {
-        styleWeight = weightMap[style.value];
-      }
-      let total = base + styleWeight;
-      
+
+      // Additional components selected dynamically
+      const selects = document.querySelectorAll('#styleOptions select');
       selects.forEach(sel => {
-        let val = sel.value;
+        const val = sel.value;
         if (val && weightMap[val]) {
           total += weightMap[val];
         }
       });
+
       document.getElementById('total').innerText = total.toFixed(2);
+    }
     }
   </script>
 </body>
