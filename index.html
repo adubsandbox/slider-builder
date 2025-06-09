@@ -267,13 +267,11 @@
       let base = 8;
       let total = base;
 
-      // Body style weight from Budget
       const style = document.getElementById('budgetBodyStyle');
       if (style && weightMap[style.value]) {
         total += weightMap[style.value];
       }
 
-      // Additional components selected dynamically
       const selects = document.querySelectorAll('#styleOptions select');
       selects.forEach(sel => {
         const val = sel.value;
@@ -283,7 +281,6 @@
       });
 
       document.getElementById('total').innerText = total.toFixed(2);
-    }
     }
   </script>
 </body>
