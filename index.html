@@ -63,7 +63,7 @@
       <h2>S.O.B. Weight Calculator</h2>
     <p style="font-size: 0.95em;"><strong>Slider Sizes</strong><br>Regular: 30mm × 46mm × 18mm<br>Slim: 30mm × 46mm × 14mm</p>
     <label>Body Budget:
-      <select id="budget" onchange="handleBudgetChange()">
+      <select id="budget" onchange="handleBudgetChange(); updateWeight();">
         <option value="">-- Select Budget --</option>
         <option value="budget">Budget</option>
         <option value="premium">Premium</option>
@@ -72,7 +72,7 @@
 
     <div id="budgetStyles" class="hidden">
       <label>Body Style:
-        <select id="budgetBodyStyle" onchange="handleBudgetBodyStyle()">
+        <select id="budgetBodyStyle" onchange="handleBudgetBodyStyle(); updateWeight();">
           <option value="">-- Select Style --</option>
           <option value="3D Print">Standard 3D Print (11g)</option>
           <option value="3D Print Divot">3D Print Divot (12g)</option>
@@ -85,7 +85,7 @@
 
     <div id="premiumStyles" class="hidden">
       <label>Body Style:
-        <select id="premiumBodyStyle" onchange="handlePremiumBodyStyle()">
+        <select id="premiumBodyStyle" onchange="handlePremiumBodyStyle(); updateWeight();">
           <option value="">-- Select Style --</option>
           <option value="standard">Standard</option>
           <option value="slim">Slim</option>
