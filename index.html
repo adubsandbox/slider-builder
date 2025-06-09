@@ -216,12 +216,18 @@
     }
 
     function buildColorSelect(label, options) {
-      const capitalizedOptions = options.map(o => o.charAt(0).toUpperCase() + o.slice(1));
+      const capitalizedOptions = options
+        .map(o => {
+          const label = o.charAt(0).toUpperCase() + o.slice(1);
+          const weight = weightMap[o] ? ` (${weightMap[o]}g)` : '';
+          return { value: o, label: `${label}${weight}`, rawWeight: weightMap[o] || 0 };
+        })
+        .sort((a, b) => a.rawWeight - b.rawWeight);
       return `
         <label>${label}:
           <select onchange="updateWeight()">
             <option value="">Select...</option>
-            ${capitalizedOptions.map(o => `<option value="${o}">${o}</option>`).join('')}
+            ${capitalizedOptions.map(o => `<option value="${o.value}">${o.label}</option>`).join('')}
           </select>
         </label>
       `;
