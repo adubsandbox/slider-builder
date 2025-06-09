@@ -209,67 +209,66 @@
     }
 
     function handlePremiumBodyStyle() {
-      const style = document.getElementById('premiumBodyStyle').value;
-      clearStyleOptions();
-      let html = '';
-      if (style === 'standard') { // Premium Standard logic
-        const bodyMaterials = [
-  { value: 'Brass (Premium)', label: 'Brass (Premium)', weight: 60 },
-  { value: 'Aluminum', label: 'Aluminum (0g)', weight: null },
-  { value: 'Copper', label: 'Copper (0g)', weight: null },
-  { value: 'Ultem', label: 'Ultem (0g)', weight: null },
-  { value: 'Crystal Titanium', label: 'Crystal Titanium (0g)', weight: null },
-  { value: 'Stainless Steel', label: 'Stainless Steel (0g)', weight: null },
-  { value: 'Zirconium', label: 'Zirconium (0g)', weight: null }
-];
-        html += `<label>Premium Body Material:
+  const style = document.getElementById('premiumBodyStyle').value;
+  clearStyleOptions();
+  let html = '';
+  if (style === 'standard') {
+    const bodyMaterials = [
+      { value: 'Brass (Premium)', label: 'Brass (Premium)', weight: 60 },
+      { value: 'Aluminum', label: 'Aluminum (0g)', weight: null },
+      { value: 'Copper', label: 'Copper (0g)', weight: null },
+      { value: 'Ultem', label: 'Ultem (0g)', weight: null },
+      { value: 'Crystal Titanium', label: 'Crystal Titanium (0g)', weight: null },
+      { value: 'Stainless Steel', label: 'Stainless Steel (0g)', weight: null },
+      { value: 'Zirconium', label: 'Zirconium (0g)', weight: null }
+    ];
+    html += `<label>Premium Body Material:
   <select name="material-select" onchange="updateWeight()">
     <option value="">Select...</option>
     ${bodyMaterials.map(mat => `<option value="${mat.value}" ${mat.weight === null ? 'disabled' : ''}>${mat.label}${mat.weight ? ` (${mat.weight}g)` : ''}</option>`).join('')}
   </select>
 </label>`;
-        html += `<div id="crystalTitaniumColorContainer" class="hidden">${buildColorSelect('Crystal Titanium Color', ['RAW', 'Purple', 'Blue', 'Green'])}</div>`;
-        html += buildInlaySelect();
-        html += buildCageSelect();
-        html += buildPlateSelect();
-
-        setTimeout(() => {
-          const selects = document.querySelectorAll('#styleOptions select, select[name="material-select"]');
+    html += `<div id="crystalTitaniumColorContainer" class="hidden">${buildColorSelect('Crystal Titanium Color', ['RAW', 'Purple', 'Blue', 'Green'])}</div>`;
+    html += buildInlaySelect();
+    html += buildCageSelect();
+    html += buildPlateSelect();
+    setTimeout(() => {
+      const selects = document.querySelectorAll('#styleOptions select, select[name="material-select"]');
       selects.forEach(sel => {
-            sel.addEventListener('change', () => {
-              if (sel.previousSibling && sel.previousSibling.textContent.includes('Premium Body Material')) {
-                const show = sel.value === 'Crystal Titanium';
-                const ctDiv = document.getElementById('crystalTitaniumColorContainer');
-                if (ctDiv) ctDiv.classList.toggle('hidden', !show);
-              }
-              updateWeight();
-            });
-          });
-        }, 0);
-      } else if (style === 'slim') { // Premium Slim logic
-        const slimMaterials = [
-          { value: 'Aluminum Slim', label: 'Aluminum Slim (0g)', weight: 0 },
-          { value: 'Brass Slim', label: 'Brass Slim (51g)', weight: 51 },
-          { value: 'Copper Slim', label: 'Copper Slim (0g)', weight: 0 },
-          { value: 'Stainless Steel Slim', label: 'Stainless Steel Slim (48g)', weight: 48 },
-          { value: 'Ultem Slim', label: 'Ultem Slim (0g)', weight: 0 },
-          { value: 'Aluminum Burst Slim', label: 'Aluminum Burst Slim (0g)', weight: 0 },
-          { value: 'Brass Burst Slim', label: 'Brass Burst Slim (0g)', weight: 0 },
-          { value: 'Copper Burst Slim', label: 'Copper Burst Slim (0g)', weight: 0 },
-          { value: 'Stainless Steel Burst Slim', label: 'Stainless Steel Burst Slim (0g)', weight: 0 }
-        ];
-        html += `<label>Premium Body Material Slim:
+        sel.addEventListener('change', () => {
+          if (sel.previousSibling && sel.previousSibling.textContent.includes('Premium Body Material')) {
+            const show = sel.value === 'Crystal Titanium';
+            const ctDiv = document.getElementById('crystalTitaniumColorContainer');
+            if (ctDiv) ctDiv.classList.toggle('hidden', !show);
+          }
+          updateWeight();
+        });
+      });
+    }, 0);
+  } else if (style === 'slim') {
+    const slimMaterials = [
+      { value: 'Aluminum Slim', label: 'Aluminum Slim (0g)', weight: 0 },
+      { value: 'Brass Slim', label: 'Brass Slim (51g)', weight: 51 },
+      { value: 'Copper Slim', label: 'Copper Slim (0g)', weight: 0 },
+      { value: 'Stainless Steel Slim', label: 'Stainless Steel Slim (48g)', weight: 48 },
+      { value: 'Ultem Slim', label: 'Ultem Slim (0g)', weight: 0 },
+      { value: 'Aluminum Burst Slim', label: 'Aluminum Burst Slim (0g)', weight: 0 },
+      { value: 'Brass Burst Slim', label: 'Brass Burst Slim (0g)', weight: 0 },
+      { value: 'Copper Burst Slim', label: 'Copper Burst Slim (0g)', weight: 0 },
+      { value: 'Stainless Steel Burst Slim', label: 'Stainless Steel Burst Slim (0g)', weight: 0 }
+    ];
+    html += `<label>Premium Body Material Slim:
   <select name="material-select" onchange="updateWeight()">
     <option value="">Select...</option>
     ${slimMaterials.map(mat => `<option value="${mat.value}">${mat.label}</option>`).join('')}
   </select>
 </label>`;
-        html += buildDidgetSelect();
-        html += buildCageSelect();
-        html += buildPlateSelect();
-
-        setTimeout(() => updateWeight(), 0);
-    }
+    html += buildDidgetSelect();
+    html += buildCageSelect();
+    html += buildPlateSelect();
+    setTimeout(() => updateWeight(), 0);
+  }
+  document.getElementById('styleOptions').innerHTML = html;
 }
 
     function buildColorSelect(label, options) {
