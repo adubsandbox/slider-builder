@@ -170,7 +170,7 @@
       const selects = document.querySelectorAll('#styleOptions select');
       selects.forEach(sel => {
         const val = sel.value;
-        if (val && weightMap[val]) {
+        if (val && weightMap[val] !== undefined) {
           total += weightMap[val];
         }
       });
