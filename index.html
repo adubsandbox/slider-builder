@@ -216,7 +216,7 @@
   { value: 'Zirconium', label: 'Zirconium (0g)', weight: null }
 ];
         html += `<label>Premium Body Material:
-  <select onchange="updateWeight()">
+  <select name="material-select" onchange="updateWeight()">
     <option value="">Select...</option>
     ${bodyMaterials.map(mat => `<option value="${mat.value}" ${mat.weight === null ? 'disabled' : ''}>${mat.label}${mat.weight ? ` (${mat.weight}g)` : ''}</option>`).join('')}
   </select>
@@ -227,7 +227,7 @@
         html += buildPlateSelect();
 
         setTimeout(() => {
-          const selects = document.querySelectorAll('#styleOptions select');
+          const selects = document.querySelectorAll('#styleOptions select, select[name="material-select"]');
       selects.forEach(sel => {
             sel.addEventListener('change', () => {
               if (sel.previousSibling && sel.previousSibling.textContent.includes('Premium Body Material')) {
@@ -252,7 +252,7 @@
           { value: 'Stainless Steel Burst Slim', label: 'Stainless Steel Burst Slim (0g)', weight: 0 }
         ];
         html += `<label>Premium Body Material Slim:
-  <select onchange="updateWeight()">
+  <select name="material-select" onchange="updateWeight()">
     <option value="">Select...</option>
     ${slimMaterials.map(mat => `<option value="${mat.value}">${mat.label}</option>`).join('')}
   </select>
@@ -277,7 +277,7 @@
         .sort((a, b) => a.rawWeight - b.rawWeight);
       return `
         <label>${label}:
-          <select onchange="updateWeight()">
+          <select name="material-select" onchange="updateWeight()">
             <option value="">Select...</option>
             ${capitalizedOptions.map(o => `<option value="${o.value}" style="${!o.isWeightRelevant ? '' : o.rawWeight === 0 ? 'color: #ff4c4c;' : ''}">${o.label}</option>`).join('')}
           </select>
