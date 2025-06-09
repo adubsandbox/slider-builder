@@ -28,10 +28,7 @@
       color: #00ccff;
       margin-bottom: 20px;
     }
-    label {
-      display: block;
-      margin: 15px 0 5px;
-      text-align: left;
+    label {$1text-align: center;
     }
     select {
       max-width: 400px;
@@ -245,16 +242,18 @@
     function buildColorSelect(label, options) {
       const capitalizedOptions = options
         .map(o => {
-          const label = o.charAt(0).toUpperCase() + o.slice(1);
-          const weight = weightMap[o] ? ` (${weightMap[o]}g)` : '';
-          return { value: o, label: `${label}${weight}`, rawWeight: weightMap[o] || 0 };
+          const labelText = o.charAt(0).toUpperCase() + o.slice(1);
+          const weight = weightMap[o];
+          const isWeightRelevant = weightMap[o] !== undefined && weight > 0;
+          const displayWeight = isWeightRelevant ? ` (${weight}g)` : '';
+          return { value: o, label: `${labelText}${displayWeight}`, rawWeight: weight || 0, isWeightRelevant };
         })
         .sort((a, b) => a.rawWeight - b.rawWeight);
       return `
         <label>${label}:
           <select onchange="updateWeight()">
             <option value="">Select...</option>
-            ${capitalizedOptions.map(o => `<option value="${o.value}" style="${o.rawWeight === 0 ? 'color: #ff4c4c;' : ''}">${o.label}</option>`).join('')}
+            ${capitalizedOptions.map(o => `<option value="${o.value}" style="${!o.isWeightRelevant ? '' : o.rawWeight === 0 ? 'color: #ff4c4c;' : ''}">${o.label}</option>`).join('')}
           </select>
         </label>
       `;
