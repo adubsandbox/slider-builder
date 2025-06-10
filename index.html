@@ -76,7 +76,7 @@
     <a href="https://www.fidgetthings.com/products/s-o-b-builder" target="_blank" style="color: #00ccff;">🔗 Open the Official FidgetThings S.O.B. Builder</a>
 
     <div class="meta-info">
-      Last updated: 2025-06-10 17:45:36 UTC<br>
+      Last updated: 2025-06-10 18:13:00 UTC<br>
       Created by: fidget-things
     </div>
   </div>
@@ -95,7 +95,7 @@
       'Flame Ti': 2,
       'Acid Ti': 2,
       'Ti': 2,
-      'Copper': 2,
+      'Copper': 4,
       'Brass': 4,
       'Brass (Premium)': 60,
       'Brass Slim': 51,
@@ -234,6 +234,21 @@
           </select>
         </label>`;
 
+        html += `<label>Slim Didget Material:
+          <select onchange="updateWeight()">
+            <option value="">Select...</option>
+            <option value="Aluminum">Aluminum (1g)</option>
+            <option value="Brass">Brass (4g)</option>
+            <option value="Copper">Copper (4g)</option>
+            <option value="Ti">Ti (2g)</option>
+            <option value="Blue Ti">Blue Ti (2g)</option>
+            <option value="Purple Ti">Purple Ti (2g)</option>
+            <option value="Yellow Ti">Yellow Ti (2g)</option>
+            <option value="Flame Ti">Flame Ti (2g)</option>
+            <option value="Acid Ti">Acid Ti (2g)</option>
+          </select>
+        </label>`;
+
         html += `<label>Magnet Cage Material:
           <select onchange="updateWeight()">
             <option value="">Select...</option>
@@ -339,7 +354,7 @@
               <option value="Acid Ti">Acid Ti (2g)</option>
               <option value="Ti">Ti (2g)</option>
               <option value="Brass">Brass (4g)</option>
-              <option value="Copper">Copper (2g)</option>
+              <option value="Copper">Copper (4g)</option>
             </select>
           </label>`;
         }
