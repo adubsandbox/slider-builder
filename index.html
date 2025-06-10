@@ -34,18 +34,27 @@
       display: block;
     }
     h3 {
-      margin-top: 30px;
+      margin-top: 20px;
+      margin-bottom: 5px;
       color: #00ff66;
       font-size: 1.8em;
     }
     p { font-size: 0.9em; color: #999; }
     .hidden { display: none; }
+    .weight-section {
+      margin-bottom: 30px;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <h2>S.O.B. Weight Calculator</h2>
     <p><strong>Slider Sizes</strong><br>Regular: 30mm × 46mm × 18mm<br>Slim: 30mm × 46mm × 14mm</p>
+
+    <div class="weight-section">
+      <h3><span id="total">8</span>g</h3>
+      <p>* Includes 8g for o-rings and magnets</p>
+    </div>
 
     <label>Body Budget:
       <select id="budget" onchange="handleBudgetChange(); updateWeight();">
@@ -57,8 +66,6 @@
 
     <div id="styleOptions"></div>
 
-    <h3><span id="total">8</span>g</h3>
-    <p>* Includes 8g for o-rings and magnets</p>
     <a href="https://www.fidgetthings.com/products/s-o-b-builder" target="_blank" style="color: #00ccff;">🔗 Open the Official FidgetThings S.O.B. Builder</a>
   </div>
 
