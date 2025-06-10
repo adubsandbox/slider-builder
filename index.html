@@ -76,7 +76,7 @@
     <a href="https://www.fidgetthings.com/products/s-o-b-builder" target="_blank" style="color: #00ccff;">🔗 Open the Official FidgetThings S.O.B. Builder</a>
 
     <div class="meta-info">
-      Last updated: 2025-06-10 17:18:54 UTC<br>
+      Last updated: 2025-06-10 17:32:34 UTC<br>
       Created by: fidget-things
     </div>
   </div>
@@ -187,6 +187,24 @@
             <option value="Crystal Titanium">Crystal Titanium (0g)</option>
             <option value="Stainless Steel">Stainless Steel (50g)</option>
             <option value="Zirconium">Zirconium (0g)</option>
+          </select>
+        </label>`;
+
+        html += `<label>Inlay Material:
+          <select onchange="updateWeight()">
+            <option value="">Select...</option>
+            <option value="Inlay - Carbon Fiber Weave">Carbon Fiber Weave (1g)</option>
+            <option value="Inlay - Forged Carbon Fiber">Forged Carbon Fiber (1g)</option>
+            <option value="Inlay - Brass">Brass (4g)</option>
+            <option value="Inlay - Copper">Copper (4g)</option>
+            <option value="Inlay - Flamed Copper">Flamed Copper (4g)</option>
+            <option value="Inlay - Raw Titanium">Raw Titanium (2g)</option>
+            <option value="Inlay - Flamed Titanium">Flamed Titanium (2g)</option>
+            <option value="Inlay - Purple Titanium">Purple Titanium (2g)</option>
+            <option value="Inlay - Blue Titanium">Blue Titanium (2g)</option>
+            <option value="Inlay - Yellow Titanium">Yellow Titanium (2g)</option>
+            <option value="Inlay - Acid Titanium">Acid Titanium (2g)</option>
+            <option value="Inlay - Zirconium">Zirconium (2g)</option>
           </select>
         </label>`;
       } else if (style === 'slim') {
