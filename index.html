@@ -203,7 +203,29 @@
       const extras = document.getElementById('budgetExtras');
       let html = '';
 
-      if (style === '3D Print Slim') {
+      if (style === '3D Print') {
+        html += `<label>Body Color:
+          <select>
+            <option value="">Select...</option>
+            <option value="Black">Black</option>
+            <option value="Green">Green</option>
+            <option value="Red">Red</option>
+            <option value="Blue">Blue</option>
+            <option value="Yellow">Yellow</option>
+            <option value="Pink">Pink</option>
+            <option value="White">White</option>
+          </select>
+        </label>`;
+
+        html += `<label>Magnet Cage:
+          <select onchange="updateWeight()">
+            <option value="">Select...</option>
+            <option value="Magnet Cage - Aluminum">Aluminum (6g)</option>
+            <option value="Magnet Cage - Stainless Steel">Stainless Steel (20g)</option>
+            <option value="Magnet Cage - Brass">Brass (24g)</option>
+          </select>
+        </label>`;
+      } else if (style === '3D Print Slim') {
         html += `<label>Slim Didget Material:
           <select onchange="updateWeight()">
             <option value="">Select...</option>
@@ -218,16 +240,16 @@
             <option value="Copper">Copper (2g)</option>
           </select>
         </label>`;
-      }
 
-      html += `<label>Magnet Cage:
-        <select onchange="updateWeight()">
-          <option value="">Select...</option>
-          <option value="Magnet Cage - Aluminum">Aluminum - Light (6g)</option>
-          <option value="Magnet Cage - Stainless Steel">Stainless Steel - Heavy (20g)</option>
-          <option value="Magnet Cage - Brass">Brass - Heaviest (24g)</option>
-        </select>
-      </label>`;
+        html += `<label>Magnet Cage:
+          <select onchange="updateWeight()">
+            <option value="">Select...</option>
+            <option value="Magnet Cage - Aluminum">Aluminum - Light (6g)</option>
+            <option value="Magnet Cage - Stainless Steel">Stainless Steel - Heavy (20g)</option>
+            <option value="Magnet Cage - Brass">Brass - Heaviest (24g)</option>
+          </select>
+        </label>`;
+      }
 
       html += `<label>Plate Material:
         <select onchange="updateWeight()">
