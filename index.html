@@ -76,7 +76,7 @@
     <a href="https://www.fidgetthings.com/products/s-o-b-builder" target="_blank" style="color: #00ccff;">🔗 Official FidgetThings S.O.B. Builder</a>
 
     <div class="meta-info">
-      Last updated: 2025-06-10 13:42:04 CST
+      Last updated: 2025-06-10 13:58:09 CST
     </div>
   </div>
 
@@ -137,6 +137,25 @@
       document.getElementById('total').innerText = total;
     }
 
+    function handlePremiumMaterialChange(material) {
+      const colorDiv = document.getElementById('premiumMaterialColor');
+      if (!colorDiv) return;
+
+      if (material === 'Crystal Titanium') {
+        colorDiv.innerHTML = `<label>Crystal Titanium Color:
+          <select>
+            <option value="">Select...</option>
+            <option value="RAW">RAW</option>
+            <option value="Purple">Purple</option>
+            <option value="Blue">Blue</option>
+            <option value="Green">Green</option>
+          </select>
+        </label>`;
+      } else {
+        colorDiv.innerHTML = '';
+      }
+    }
+
     function handleBudgetChange() {
       const budget = document.getElementById('budget').value;
       const styleOptions = document.getElementById('styleOptions');
@@ -177,7 +196,7 @@
 
       if (style === 'standard') {
         html += `<label>Premium Body Material Standard:
-          <select name="material-select" onchange="updateWeight()">
+          <select name="material-select" onchange="handlePremiumMaterialChange(this.value); updateWeight()">
             <option value="">Select...</option>
             <option value="Aluminum">Aluminum (0g)</option>
             <option value="Brass (Premium)">Brass (60g)</option>
@@ -188,6 +207,8 @@
             <option value="Zirconium">Zirconium (0g)</option>
           </select>
         </label>`;
+
+        html += `<div id="premiumMaterialColor"></div>`;
 
         html += `<label>Inlay Material:
           <select onchange="updateWeight()">
