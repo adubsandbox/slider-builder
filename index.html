@@ -76,7 +76,7 @@
     <a href="https://www.fidgetthings.com/products/s-o-b-builder" target="_blank" style="color: #00ccff;">🔗 Open the Official FidgetThings S.O.B. Builder</a>
 
     <div class="meta-info">
-      Last updated: 2025-06-10 16:07:37 UTC<br>
+      Last updated: 2025-06-10 16:31:17 UTC<br>
       Created by: fidget-things
     </div>
   </div>
@@ -100,7 +100,7 @@
       'Brass (Premium)': 60,
       'Brass Slim': 51,
       'Stainless Steel Slim': 48,
-      'Stainless Steel': 56,
+      'Stainless Steel': 50,
       'Magnet Cage - Aluminum': 6,
       'Magnet Cage - Stainless Steel': 20,
       'Magnet Cage - Brass': 24,
@@ -180,12 +180,12 @@
         html += `<label>Premium Body Material:
           <select name="material-select" onchange="updateWeight()">
             <option value="">Select...</option>
-            <option value="Brass (Premium)">Brass (Premium) (60g)</option>
             <option value="Aluminum">Aluminum (0g)</option>
+            <option value="Brass (Premium)">Brass (60g)</option>
             <option value="Copper">Copper (0g)</option>
             <option value="Ultem">Ultem (0g)</option>
             <option value="Crystal Titanium">Crystal Titanium (0g)</option>
-            <option value="Stainless Steel">Stainless Steel (56g)</option>
+            <option value="Stainless Steel">Stainless Steel (50g)</option>
             <option value="Zirconium">Zirconium (0g)</option>
           </select>
         </label>`;
@@ -209,9 +209,9 @@
       html += `<label>Magnet Cage Material:
         <select onchange="updateWeight()">
           <option value="">Select...</option>
-          <option value="Magnet Cage - Aluminum">Aluminum - Light (6g)</option>
-          <option value="Magnet Cage - Stainless Steel">Stainless Steel - Heavy (20g)</option>
-          <option value="Magnet Cage - Brass">Brass - Heaviest (24g)</option>
+          <option value="Magnet Cage - Aluminum">Aluminum (6g)</option>
+          <option value="Magnet Cage - Stainless Steel">Stainless Steel (20g)</option>
+          <option value="Magnet Cage - Brass">Brass (24g)</option>
         </select>
       </label>`;
 
