@@ -84,6 +84,7 @@
       'Magnet Cage - Aluminum': 6,
       'Magnet Cage - Stainless Steel': 20,
       'Magnet Cage - Brass': 24,
+      'ED TPU Cage Set': 0,
       'Plate - Stainless Steel': 11,
       'Plate - Zirconium': 12,
       'Plate - Teflon Beta': 0,
@@ -203,19 +204,38 @@
       const extras = document.getElementById('budgetExtras');
       let html = '';
 
-      if (style === '3D Print') {
-        html += `<label>Body Color:
-          <select>
-            <option value="">Select...</option>
-            <option value="Black">Black</option>
-            <option value="Green">Green</option>
-            <option value="Red">Red</option>
-            <option value="Blue">Blue</option>
-            <option value="Yellow">Yellow</option>
-            <option value="Pink">Pink</option>
-            <option value="White">White</option>
-          </select>
-        </label>`;
+      if (style === '3D Print' || style === '3D Print Divot' || style === '3D Print Slim') {
+        if (style === '3D Print') {
+          html += `<label>Body Color:
+            <select>
+              <option value="">Select...</option>
+              <option value="Black">Black</option>
+              <option value="Green">Green</option>
+              <option value="Red">Red</option>
+              <option value="Blue">Blue</option>
+              <option value="Yellow">Yellow</option>
+              <option value="Pink">Pink</option>
+              <option value="White">White</option>
+            </select>
+          </label>`;
+        }
+
+        if (style === '3D Print Slim') {
+          html += `<label>Slim Didget Material:
+            <select onchange="updateWeight()">
+              <option value="">Select...</option>
+              <option value="Aluminum">Aluminum (1g)</option>
+              <option value="Blue Ti">Blue Ti (2g)</option>
+              <option value="Purple Ti">Purple Ti (2g)</option>
+              <option value="Yellow Ti">Yellow Ti (2g)</option>
+              <option value="Flame Ti">Flame Ti (2g)</option>
+              <option value="Acid Ti">Acid Ti (2g)</option>
+              <option value="Ti">Ti (2g)</option>
+              <option value="Brass">Brass (4g)</option>
+              <option value="Copper">Copper (2g)</option>
+            </select>
+          </label>`;
+        }
 
         html += `<label>Magnet Cage Material:
           <select onchange="updateWeight()">
@@ -223,30 +243,16 @@
             <option value="Magnet Cage - Aluminum">Aluminum (6g)</option>
             <option value="Magnet Cage - Stainless Steel">Stainless Steel (20g)</option>
             <option value="Magnet Cage - Brass">Brass (24g)</option>
+            <option value="ED TPU Cage Set">ED TPU Cage Set (0g)</option>
           </select>
         </label>`;
-      } else if (style === '3D Print Slim') {
-        html += `<label>Slim Didget Material:
+      } else if (style === 'trider' || style === 'slimtrider') {
+        html += `<label>Trider Magnet Cage Material:
           <select onchange="updateWeight()">
             <option value="">Select...</option>
-            <option value="Aluminum">Aluminum (1g)</option>
-            <option value="Blue Ti">Blue Ti (2g)</option>
-            <option value="Purple Ti">Purple Ti (2g)</option>
-            <option value="Yellow Ti">Yellow Ti (2g)</option>
-            <option value="Flame Ti">Flame Ti (2g)</option>
-            <option value="Acid Ti">Acid Ti (2g)</option>
-            <option value="Ti">Ti (2g)</option>
-            <option value="Brass">Brass (4g)</option>
-            <option value="Copper">Copper (2g)</option>
-          </select>
-        </label>`;
-
-        html += `<label>Magnet Cage Material:
-          <select onchange="updateWeight()">
-            <option value="">Select...</option>
-            <option value="Magnet Cage - Aluminum">Aluminum - Light (6g)</option>
-            <option value="Magnet Cage - Stainless Steel">Stainless Steel - Heavy (20g)</option>
-            <option value="Magnet Cage - Brass">Brass - Heaviest (24g)</option>
+            <option value="Magnet Cage - Aluminum">Aluminum (6g)</option>
+            <option value="Magnet Cage - Stainless Steel">Stainless Steel (20g)</option>
+            <option value="Magnet Cage - Brass">Brass (24g)</option>
           </select>
         </label>`;
       }
