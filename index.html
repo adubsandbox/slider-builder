@@ -44,6 +44,13 @@
     .weight-section {
       margin-bottom: 30px;
     }
+    .meta-info {
+      font-size: 0.8em;
+      color: #666;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #333;
+    }
   </style>
 </head>
 <body>
@@ -67,6 +74,11 @@
     <div id="styleOptions"></div>
 
     <a href="https://www.fidgetthings.com/products/s-o-b-builder" target="_blank" style="color: #00ccff;">🔗 Open the Official FidgetThings S.O.B. Builder</a>
+
+    <div class="meta-info">
+      Last updated: 2025-06-10 15:50:46 UTC<br>
+      Created by: fidget-things
+    </div>
   </div>
 
   <script>
@@ -207,7 +219,7 @@
           <option value="">Select...</option>
           <option value="Plate - Stainless Steel">Stainless Steel (11g)</option>
           <option value="Plate - Zirconium">Zirconium (12g)</option>
-          <option value="Plate - Teflon Beta">Teflon Beta Plates (0g)</option>
+          <option value="Plate - Teflon Beta">Teflon BETA Plates (0g)</option>
           <option value="Plate - Pro Stainless Steel">Pro Stainless Steel Plates (16g)</option>
           <option value="Plate - Pro Swoosh Stainless Steel">Pro Swoosh Stainless Steel Plates (15g)</option>
           <option value="Plate - Pro Zirconium">Pro Zirconium Plates (12g)</option>
@@ -333,6 +345,12 @@
             <option value="Magnet Cage - Brass">Brass (24g)</option>
           </select>
         </label>`;
+
+        html += `<label>Plate Material:
+          <select onchange="updateWeight()">
+            <option value="Plate - Stainless Steel">Stainless Steel (11g)</option>
+          </select>
+        </label>`;
       } else if (style === 'slimtrider') {
         html += `<label>Slim Trider Color:
           <select>
@@ -350,19 +368,27 @@
             <option value="Magnet Cage - Brass">Brass (24g)</option>
           </select>
         </label>`;
+
+        html += `<label>Plate Material:
+          <select onchange="updateWeight()">
+            <option value="Plate - Stainless Steel">Stainless Steel (11g)</option>
+          </select>
+        </label>`;
       }
 
-      html += `<label>Plate Material:
-        <select onchange="updateWeight()">
-          <option value="">Select...</option>
-          <option value="Plate - Stainless Steel">Stainless Steel (11g)</option>
-          <option value="Plate - Zirconium">Zirconium (12g)</option>
-          <option value="Plate - Teflon Beta">Teflon Beta Plates (0g)</option>
-          <option value="Plate - Pro Stainless Steel">Pro Stainless Steel Plates (16g)</option>
-          <option value="Plate - Pro Swoosh Stainless Steel">Pro Swoosh Stainless Steel Plates (15g)</option>
-          <option value="Plate - Pro Zirconium">Pro Zirconium Plates (12g)</option>
-        </select>
-      </label>`;
+      if (style !== 'trider' && style !== 'slimtrider') {
+        html += `<label>Plate Material:
+          <select onchange="updateWeight()">
+            <option value="">Select...</option>
+            <option value="Plate - Stainless Steel">Stainless Steel (11g)</option>
+            <option value="Plate - Zirconium">Zirconium (12g)</option>
+            <option value="Plate - Teflon Beta">Teflon BETA Plates (0g)</option>
+            <option value="Plate - Pro Stainless Steel">Pro Stainless Steel Plates (16g)</option>
+            <option value="Plate - Pro Swoosh Stainless Steel">Pro Swoosh Stainless Steel Plates (15g)</option>
+            <option value="Plate - Pro Zirconium">Pro Zirconium Plates (12g)</option>
+          </select>
+        </label>`;
+      }
 
       extras.innerHTML = html;
       updateWeight();
