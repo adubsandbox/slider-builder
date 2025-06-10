@@ -97,7 +97,19 @@
       'Plate - Teflon Beta': 0,
       'Plate - Pro Stainless Steel': 16,
       'Plate - Pro Swoosh Stainless Steel': 15,
-      'Plate - Pro Zirconium': 12
+      'Plate - Pro Zirconium': 12,
+      'Inlay - Carbon Fiber Weave': 1,
+      'Inlay - Forged Carbon Fiber': 1,
+      'Inlay - Brass': 4,
+      'Inlay - Copper': 4,
+      'Inlay - Flamed Copper': 4,
+      'Inlay - Raw Titanium': 2,
+      'Inlay - Flamed Titanium': 2,
+      'Inlay - Purple Titanium': 2,
+      'Inlay - Blue Titanium': 2,
+      'Inlay - Yellow Titanium': 2,
+      'Inlay - Acid Titanium': 2,
+      'Inlay - Zirconium': 2
     };
 
     function updateWeight() {
@@ -238,20 +250,20 @@
           </label>`;
 
           html += `<label>Inlay Material:
-            <select>
+            <select onchange="updateWeight()">
               <option value="">Select...</option>
-              <option value="Carbon Fiber Weave">Carbon Fiber Weave</option>
-              <option value="Forged Carbon Fiber">Forged Carbon Fiber</option>
-              <option value="Brass">Brass</option>
-              <option value="Copper">Copper</option>
-              <option value="Flamed Copper">Flamed Copper</option>
-              <option value="Raw Titanium">Raw Titanium</option>
-              <option value="Flamed Titanium">Flamed Titanium</option>
-              <option value="Purple Titanium">Purple Titanium</option>
-              <option value="Blue Titanium">Blue Titanium</option>
-              <option value="Yellow Titanium">Yellow Titanium</option>
-              <option value="Acid Titanium">Acid Titanium</option>
-              <option value="Zirconium">Zirconium</option>
+              <option value="Inlay - Carbon Fiber Weave">Carbon Fiber Weave (1g)</option>
+              <option value="Inlay - Forged Carbon Fiber">Forged Carbon Fiber (1g)</option>
+              <option value="Inlay - Brass">Brass (4g)</option>
+              <option value="Inlay - Copper">Copper (4g)</option>
+              <option value="Inlay - Flamed Copper">Flamed Copper (4g)</option>
+              <option value="Inlay - Raw Titanium">Raw Titanium (2g)</option>
+              <option value="Inlay - Flamed Titanium">Flamed Titanium (2g)</option>
+              <option value="Inlay - Purple Titanium">Purple Titanium (2g)</option>
+              <option value="Inlay - Blue Titanium">Blue Titanium (2g)</option>
+              <option value="Inlay - Yellow Titanium">Yellow Titanium (2g)</option>
+              <option value="Inlay - Acid Titanium">Acid Titanium (2g)</option>
+              <option value="Inlay - Zirconium">Zirconium (2g)</option>
             </select>
           </label>`;
         }
