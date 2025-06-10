@@ -51,6 +51,21 @@
       padding-top: 20px;
       border-top: 1px solid #333;
     }
+    .reset-button {
+      background-color: #444;
+      color: #f0f0f0;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin: 20px auto;
+      display: block;
+      font-size: 1rem;
+      transition: background-color 0.2s;
+    }
+    .reset-button:hover {
+      background-color: #666;
+    }
   </style>
 </head>
 <body>
@@ -73,10 +88,12 @@
 
     <div id="styleOptions"></div>
 
+    <button class="reset-button" onclick="resetAll()">Reset All</button>
+
     <a href="https://www.fidgetthings.com/products/s-o-b-builder" target="_blank" style="color: #00ccff;">🔗 Official FidgetThings S.O.B. Builder</a>
 
     <div class="meta-info">
-      Last updated: 2025-06-10 13:58:09 CST
+      Last updated: 2025-06-10 14:33:15 CST
     </div>
   </div>
 
@@ -123,6 +140,17 @@
       'Inlay - Acid Titanium': 2,
       'Inlay - Zirconium': 2
     };
+
+    function resetAll() {
+      // Reset budget dropdown
+      document.getElementById('budget').value = '';
+      
+      // Clear style options
+      document.getElementById('styleOptions').innerHTML = '';
+      
+      // Reset total weight to base weight
+      document.getElementById('total').innerText = '8';
+    }
 
     function updateWeight() {
       let base = 8;
